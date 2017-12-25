@@ -2,91 +2,67 @@
   <div class="content">
     <div class="container-fluid">
       <div class="row">
-        <!-- <div class="col-xl-3 col-md-6">
-          <stats-card>
-            <div slot="header" class="icon-warning">
-              <i class="nc-icon nc-chart text-warning"></i>
-            </div>
-            <div slot="content">
-              <p class="card-category">Capacity</p>
-              <h4 class="card-title">105GB</h4>
-            </div>
-            <div slot="footer">
-              <i class="fa fa-refresh"></i>Updated now
-            </div>
-          </stats-card>
-        </div> -->
-
-        <!-- <div class="col-xl-3 col-md-6">
-          <stats-card>
-            <div slot="header" class="icon-success">
-              <i class="nc-icon nc-light-3 text-success"></i>
-            </div>
-            <div slot="content">
-              <p class="card-category">Revenue</p>
-              <h4 class="card-title">$1,345</h4>
-            </div>
-            <div slot="footer">
-              <i class="fa fa-calendar-o"></i>Last day
-            </div>
-          </stats-card>
-        </div> -->
-
-        <!-- <div class="col-xl-3 col-md-6">
-          <stats-card>
-            <div slot="header" class="icon-danger">
-              <i class="nc-icon nc-vector text-danger"></i>
-            </div>
-            <div slot="content">
-              <p class="card-category">Errors</p>
-              <h4 class="card-title">23</h4>
-            </div>
-            <div slot="footer">
-              <i class="fa fa-clock-o"></i>Last day
-            </div>
-          </stats-card>
-        </div> -->
-
-        <!-- <div class="col-xl-3 col-md-6">
-          <stats-card>
-            <div slot="header" class="icon-info">
-              <i class="nc-icon nc-favourite-28 text-primary"></i>
-            </div>
-            <div slot="content">
-              <p class="card-category">Followers</p>
-              <h4 class="card-title">+45</h4>
-            </div>
-            <div slot="footer">
-              <i class="fa fa-refresh"></i>Updated now
-            </div>
-          </stats-card>
-        </div> -->
-      </div>
-
-      <div class="row">
-        <!-- <div class="col-md-4">
-          <chart-card :chart-data="lineChart.data"
-                      :chart-options="lineChart.options"
-                      :responsive-options="lineChart.responsiveOptions">
-            <template slot="header">
-              <h4 class="card-title">Users Behavior</h4>
-              <p class="card-category">24 Hours performance</p>
-            </template>
-            <template slot="footer">
-              <div class="legend">
-                <i class="fa fa-circle text-info"></i> Open
-                <i class="fa fa-circle text-danger"></i> Click
-                <i class="fa fa-circle text-warning"></i> Click Second Time
-              </div>
-              <hr>
-              <div class="stats">
-                <i class="fa fa-history"></i> Updated 3 minutes ago
-              </div>
-            </template>
-          </chart-card>
-        </div> -->
 
         <div class="col-md-6">
+          <div class="dashboardone">
+            <div class="col-md-12" style="padding-top:1px; padding-left:20px; padding-bottom: 1px;">
+              <h4>Summary Operating Results</h4>
+            </div>
+            <hr>
+            <div class="col-md-12" style="padding-top:1px; padding-left:20px; padding-bottom: 1px;">
+              <progress class="progress is-info" v-bind:value="count" max="30"> {{ count }} %</progress>
+              <progress class="progress is-danger" v-bind:value="sumtodo" max="30"> {{ sumall - count }} %</progress>
+              <progress class="progress is-warning" v-bind:value="sumprogress" max="30"> {{ sumprogress }} %</progress>
+              <progress class="progress is-success" v-bind:value="donecount" max="30"> {{ donecount }} %</progress>
+            </div>
+            <hr>
+            <div style="padding-top:1px; padding-left:20px; padding-bottom: 1px;">
+              <i class="fa fa-circle text-info"></i> All Workload : {{ count }} % <br>
+              <i class="fa fa-circle text-danger"></i> To Do : {{ sumall - count }} % <br>
+              <i class="fa fa-circle text-warning"></i> In progress : {{ sumprogress }} % <br>
+              <i class="fa fa-circle text-success"></i> Done : {{ donecount }} % <br>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="dashboardone">
+            <div class="col-md-12" style="padding-top:1px; padding-left:20px; padding-bottom: 1px;">
+              <h4>Performance Report</h4>
+            </div>
+            <hr>
+            <div class="col-md-12" style="padding-top:1px; padding-left:20px; padding-bottom: 1px;">
+              <progress class="progress is-info" v-bind:value="PerformanceA" max="30"> {{ PerformanceA }} %</progress>
+              <progress class="progress is-warning" v-bind:value="PerformanceSum" max="30"> {{ PerformanceSum }} %</progress>
+              <progress class="progress is-success" v-bind:value="PerformanceB" max="30"> {{ PerformanceB }} %</progress>
+              <progress class="progress is-primary" v-bind:value="PerformanceOnTime" max="30"> {{ PerformanceOnTime }} %</progress>
+              <progress class="progress is-danger" v-bind:value="PerformanceDelay" max="30"> {{ PerformanceDelay }} %</progress>
+            </div>
+            <hr>
+            <div style="padding-top:1px; padding-left:20px; padding-bottom: 1px;">
+              <i class="fa fa-circle text-info"></i> All work is done : {{ PerformanceA }} % <br>
+              <i class="fa fa-circle text-warning"></i> All work is doing : {{ PerformanceA - PerformanceB }} % <br>
+              <i class="fa fa-circle text-success"></i> All work is success : {{ PerformanceB }} % <br>
+              <i class="fa fa-circle text-primary"></i> All work done on time : {{ PerformanceOnTime }} % <br>
+              <i class="fa fa-circle text-danger"></i> All work done is delayed : {{ PerformanceDelay }} % <br>
+              <div style="padding-top:10px;" align="center">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalA">
+                  Apinan Singbut
+                </button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalB">
+                  P'Tang Ratabhoom Boongate
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <br>
+
+      <div class="row">
+        <!-- <div class="col-md-6">
           <chart-card :chart-data="pieChart.data" chart-type="Pie">
             <template slot="header">
               <h4 class="card-title">Email Statistics</h4>
@@ -108,9 +84,9 @@
               </div>
             </template>
           </chart-card>
-        </div>
+        </div> -->
 
-        <div class="col-md-6">
+        <!-- <div class="col-md-6">
           <chart-card
             :chart-data="barChart.data"
             :chart-options="barChart.options"
@@ -135,32 +111,56 @@
               </div>
             </template>
           </chart-card>
-        </div>
+        </div> -->
 
-        งานทั้งหมด : {{ count }} <br>
+        <!-- งานทั้งหมด : {{ count }} <br>
         To Do : {{ sumall - count }}<br>
         In Progress : {{ sumprogress }} <br>
-        Done : {{ donecount }}<br><br>
+        Done : {{ donecount }}<br><br> -->
+
+        <!-- Performance<br>
+        งานทั้งหมดที่มีคนทำ : {{ PerformanceA }}<br>
+        งานทั้งหมดที่กำลังทำอยู่ : {{ PerformanceA - PerformanceB }}<br>
+        งานทั้งหมดที่ทำเสร็จแล้ว : {{ PerformanceB }}<br>
+        งานทั้งหมดที่ทำเสร็จตามเวลา : {{ PerformanceOnTime }}<br>
+        งานทั้งหมดที่ทำเสร็จล่าช้า : {{ PerformanceDelay }}<br><br>
 
         Apinan Singbut<br>
         งานทั้งหมดที่ Apinan เป็นคนทำ : {{ ApinanA }}<br>
         งานทั้งหมดที่ Apinan กำลังทำอยู่ : {{ ApinanA - ApinanB }}<br>
         งานทั้งหมดที่ Apinan ทำเสร็จแล้ว : {{ ApinanB }}<br>
         งานทั้งหมดที่ Apinan ทำเสร็จตามเวลา : {{ ApinanOnTime }}<br>
-        งานทั้งหมดที่ Apinan ทำเสร็จล่าช้า : {{ ApinanDelay }}<br>
+        งานทั้งหมดที่ Apinan ทำเสร็จล่าช้า : {{ ApinanDelay }}<br><br>
+
+        P'Tang Ratabhoom Boongate<br>
+        งานทั้งหมดที่ P'Tang Ratabhoom Boongate เป็นคนทำ : {{ TangA }}<br>
+        งานทั้งหมดที่ P'Tang Ratabhoom Boongate กำลังทำอยู่ : {{ TangA - TangB }}<br>
+        งานทั้งหมดที่ P'Tang Ratabhoom Boongate ทำเสร็จแล้ว : {{ TangB }}<br>
+        งานทั้งหมดที่ P'Tang Ratabhoom Boongate ทำเสร็จตามเวลา : {{ TangOnTime }}<br>
+        งานทั้งหมดที่ P'Tang Ratabhoom Boongate ทำเสร็จล่าช้า : {{ TangDelay }}<br> -->
 
         <!-- Modal A -->
         <div class="modal fade" id="exampleModalA" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Apinan Singbut</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body">
-                A
+                <progress class="progress is-info" v-bind:value="ApinanA" max="30"> {{ ApinanA }} %</progress>
+                <progress class="progress is-warning" v-bind:value="ApinanA" max="30"> {{ ApinanSum }} %</progress>
+                <progress class="progress is-success" v-bind:value="ApinanB" max="30"> {{ ApinanB }} %</progress>
+                <progress class="progress is-primary" v-bind:value="ApinanOnTime" max="30"> {{ ApinanOnTime }} %</progress>
+                <progress class="progress is-danger" v-bind:value="ApinanDelay" max="30"> {{ ApinanDelay }} %</progress>
+                <hr>
+                <i class="fa fa-circle text-info"></i> All work at Apinan Singbut is done : {{ ApinanA }} % <br>
+                <i class="fa fa-circle text-warning"></i> All the work that Apinan Singbut is doing : {{ ApinanA - ApinanB }} % <br>
+                <i class="fa fa-circle text-success"></i> All work at Apinan Singbut is success : {{ ApinanB }} % <br>
+                <i class="fa fa-circle text-primary"></i> All work at Apinan Singbut is Finished in time : {{ ApinanOnTime }} % <br>
+                <i class="fa fa-circle text-danger"></i> All work at Apinan Singbut is Delayed : {{ ApinanDelay }} % <br>
               </div>
               <div class="modal-footer">
 
@@ -175,13 +175,23 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">P'Tang Ratabhoom Boongate</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body">
-                B
+                <progress class="progress is-info" v-bind:value="TangA" max="30"> {{ TangA }} %</progress>
+                <progress class="progress is-warning" v-bind:value="TangSum" max="30"> {{ TangSum }} %</progress>
+                <progress class="progress is-success" v-bind:value="TangB" max="30"> {{ TangB }} %</progress>
+                <progress class="progress is-primary" v-bind:value="TangOnTime" max="30"> {{ TangOnTime }} %</progress>
+                <progress class="progress is-danger" v-bind:value="TangDelay" max="30"> {{ TangDelay }} %</progress>
+                <hr>
+                <i class="fa fa-circle text-info"></i> All work at P'Tang Ratabhoom Boongate is done : {{ TangA }} % <br>
+                <i class="fa fa-circle text-warning"></i> All the work that P'Tang Ratabhoom Boongate is doing : {{ TangA - TangB }} % <br>
+                <i class="fa fa-circle text-success"></i> All work at P'Tang Ratabhoom Boongate is success : {{ TangB }} % <br>
+                <i class="fa fa-circle text-primary"></i> All work at P'Tang Ratabhoom Boongate is Finished in time : {{ TangOnTime }} % <br>
+                <i class="fa fa-circle text-danger"></i> All work at P'Tang Ratabhoom Boongate is Delayed : {{ TangDelay }} % <br>
               </div>
               <div class="modal-footer">
 
@@ -192,42 +202,6 @@
         <!-- End Modal B -->
 
       </div>
-
-      <div class="row">
-        <div class="col-md-6" style="background-color: #FFFFFF">
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-          <br>
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-          <br>
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </div>
-
-        <div class="col-md-6">
-          <chart-card
-            :chart-data="barChart.data"
-            :chart-options="barChart.options"
-            :chart-responsive-options="barChart.responsiveOptions"
-            chart-type="Bar">
-            <template slot="header">
-              <h4 class="card-title">2014 Sales</h4>
-              <p class="card-category">All products including Taxes</p>
-            </template>
-            <template slot="footer">
-              <div class="legend">
-                <i class="fa fa-circle text-info"></i> Tesla Model S
-                <i class="fa fa-circle text-danger"></i> BMW 5 Series
-              </div>
-            </template>
-          </chart-card>
-        </div>
-      </div>
-
     </div>
   </div>
 </template>
@@ -266,10 +240,24 @@
         sumprogress: 0,
         donecount: 0,
         feedid: 0,
+
+        PerformanceA: 0,
+        PerformanceB: 0,
+        PerformanceSum: 0,
+        PerformanceOnTime: 0,
+        PerformanceDelay: 0,
+
         ApinanA: 0,
         ApinanB: 0,
+        ApinanSum: 0,
         ApinanOnTime: 0,
         ApinanDelay: 0,
+
+        TangA: 0,
+        TangB: 0,
+        TangSum: 0,
+        TangOnTime: 0,
+        TangDelay: 0,
 
         editTooltip: 'Edit Task',
         deleteTooltip: 'Remove',
@@ -279,41 +267,6 @@
             labels: ['40%', '20%', '40%'],
             series: [40, 20, 40]
           }
-        },
-        lineChart: {
-          data: {
-            labels: ['9:00AM', '12:00AM', '3:00PM', '6:00PM', '9:00PM', '12:00PM', '3:00AM', '6:00AM'],
-            series: [
-              [287, 385, 490, 492, 554, 586, 698, 695],
-              [67, 152, 143, 240, 287, 335, 435, 437],
-              [23, 113, 67, 108, 190, 239, 307, 308]
-            ]
-          },
-          options: {
-            low: 0,
-            high: 800,
-            showArea: false,
-            height: '245px',
-            axisX: {
-              showGrid: false
-            },
-            lineSmooth: true,
-            showLine: true,
-            showPoint: true,
-            fullWidth: true,
-            chartPadding: {
-              right: 50
-            }
-          },
-          responsiveOptions: [
-            ['screen and (max-width: 640px)', {
-              axisX: {
-                labelInterpolationFnc (value) {
-                  return value[0]
-                }
-              }
-            }]
-          ]
         },
         barChart: {
           data: {
@@ -339,19 +292,6 @@
                 }
               }
             }]
-          ]
-        },
-        tableData: {
-          data: [
-            {title: 'Sign contract for "What are conference organizers afraid of?"', checked: false},
-            {title: 'Lines From Great Russian Literature? Or E-mails From My Boss?', checked: true},
-            {
-              title: 'Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit',
-              checked: true
-            },
-            {title: 'Create 4 Invisible User Experiences you Never Knew About', checked: false},
-            {title: 'Read "Following makes Medium better"', checked: false},
-            {title: 'Unfollow 5 enemies from twitter', checked: false}
           ]
         }
       }
@@ -386,10 +326,15 @@
         })
       }, 1024)
     },
+    watch: {
+      count () {
+        this.pieChart.data.series[0] = this.count
+      }
+    },
     // Fetches posts when the component is created.
     created () {
       let that = this
-      axios.get('https://graph.facebook.com/138501810233037?fields=feed&access_token=EAACEdEose0cBALgt8D4eBZCWic2ReVNHj0OHsLIRSWQaoJ6bpiWZAmZCHfAcWFoBbVarYguZAllrtUwb4hEmUZBZAcabrpYwHbe1DJUBZBMigl5pKDSO0M3lGhUflyc2Ox7JMmeqGTNZBPxRZA51YaUwoVMiZCz0ETdgNl3W6Yet5427a4ovZCO7QGiBZBhkpNo3omcZD')
+      axios.get('https://graph.facebook.com/138501810233037?fields=feed&access_token=EAACEdEose0cBAD7ikBUNoJNMNw2SNbq0BxAalhMZC94EmewnGkcFwIOJZBmndyIXvD4tEYfKGUrarjMMLq83zxsbdJFtYFvqTSchg9Hmqfs0KECJCEWrnIi7NEZBMPa6R5xuHi6Cl4ZAqwt41YBVZCknTn2pblZAXtuOOA01rfeKqC1onKOGE0bZC5prGl8x9sZD')
       .then(response => {
         this.posts = response.data
         // console.log(this.posts.feed.data)s
@@ -426,7 +371,7 @@
           }
         })
       })
-      axios.get('https://graph.facebook.com/138501810233037?fields=feed{comments}&access_token=EAACEdEose0cBALgt8D4eBZCWic2ReVNHj0OHsLIRSWQaoJ6bpiWZAmZCHfAcWFoBbVarYguZAllrtUwb4hEmUZBZAcabrpYwHbe1DJUBZBMigl5pKDSO0M3lGhUflyc2Ox7JMmeqGTNZBPxRZA51YaUwoVMiZCz0ETdgNl3W6Yet5427a4ovZCO7QGiBZBhkpNo3omcZD')
+      axios.get('https://graph.facebook.com/138501810233037?fields=feed{comments}&access_token=EAACEdEose0cBAD7ikBUNoJNMNw2SNbq0BxAalhMZC94EmewnGkcFwIOJZBmndyIXvD4tEYfKGUrarjMMLq83zxsbdJFtYFvqTSchg9Hmqfs0KECJCEWrnIi7NEZBMPa6R5xuHi6Cl4ZAqwt41YBVZCknTn2pblZAXtuOOA01rfeKqC1onKOGE0bZC5prGl8x9sZD')
       .then(response => {
         this.comments = response.data
         // console.log(this.comments.feed.data[0].comments.data[0].from.name)
@@ -451,7 +396,7 @@
               that.progresscount++
               that.sumall = (that.progresscount + that.donecount)
               that.sumprogress = that.progresscount - that.donecount
-
+              that.sumtodo = (that.progresscount + that.donecount)-that.count
               that.todo.push(result)
               // if (that.todo.name === 'Apinan Singbut') {
               //   that.ApinanA++
@@ -488,6 +433,20 @@
 
             let results = that.todo.find(item => item.id === comment.id)
             console.log(results.status)
+            if (results.status === 'กำลังทำ') {
+              that.PerformanceA++
+            }
+            if (results.status === 'ทำเสร็จแล้ว') {
+              that.PerformanceB++
+            }
+            if (results.dash === 'On time') {
+              that.PerformanceOnTime++
+            }
+            if (results.dash === 'Delay') {
+              that.PerformanceDelay++
+            }
+            that.PerformanceSum = that.PerformanceA - that.PerformanceB
+
             if (results.status === 'กำลังทำ' && results.name === 'Apinan Singbut') {
               that.ApinanA++
             }
@@ -500,7 +459,21 @@
             if (results.dash === 'Delay' && results.name === 'Apinan Singbut') {
               that.ApinanDelay++
             }
+            that.ApinanSum = that.ApinanA - that.ApinanB
 
+            if (results.status === 'กำลังทำ' && results.name === "P'Tang Ratabhoom Boongate") {
+              that.TangA++
+            }
+            if (results.status === 'ทำเสร็จแล้ว' && results.name === "P'Tang Ratabhoom Boongate") {
+              that.TangB++
+            }
+            if (results.dash === 'On time' && results.name === "P'Tang Ratabhoom Boongate") {
+              that.TangOnTime++
+            }
+            if (results.dash === 'Delay' && results.name === "P'Tang Ratabhoom Boongate") {
+              that.TangDelay++
+            }
+            that.TangSum = that.TangA - that.TangB
           })
           // console.log(that.progress)
         })
@@ -512,5 +485,12 @@
   }
 </script>
 <style>
-
+  .dashboardone{ /*บล๊อขาว*/
+    margin: auto; /*บล๊อกอยู่กลาง*/
+    width: 90%;
+    height: 510px;
+    border-radius: 2px; /*ความโค้งมนของขอบบล๊อก*/
+    box-shadow: 0 0 15px #333 ; /*เงาของบล๊อก*/
+    background: #FFF; /*สีบล๊อก*/
+  }
 </style>

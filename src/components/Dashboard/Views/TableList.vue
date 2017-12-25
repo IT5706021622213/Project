@@ -4,9 +4,9 @@
       <!-- To Do -->
       <div class="col-md-4">
         <table width="100%">
-          <tr style="background-color: #00D1B2">
+          <tr>
             <td width="100%" height="100%">
-              <div>
+              <div style="background-color: #272728; padding-top:10px; padding-bottom:10px; box-shadow: 0 0 15px #333;">
                 <font color="#FFFFFF" size="4"><center>To Do</center></font>
               </div>
             </td>
@@ -21,11 +21,11 @@
                   &nbsp;&nbsp;&nbsp;{{ message.msg }}
                 </div> -->
                 <div v-if = "message.status == 'ยังไม่ได้ทำ'" class="card" style="width: 20rem;">
-                  <div class="message-header" style="background-color: #F8D7DA">
-                    <p>&nbsp;&nbsp;&nbsp;Status : <font color="#EEBA34"><b>Wait</b></font></p>
+                  <div class="message-header" style="background-color: #BFB8C0; padding-top:20px; padding-left:10px;">
+                    <p><font color="#000000" size="3">Status : </font><font color="#EEBA34" size="3"><b>Wait</b></font></p>
                   </div>
-                  <div class="message-body">
-                    &nbsp;&nbsp;&nbsp;{{ message.msg }}
+                  <div class="message-body" style="padding-top:12px; padding-left:10px;">
+                    <font color="#000000" size="2">&nbsp;&nbsp;&nbsp;{{ message.msg }}</font>
                   </div>
                 </div>
                 <!-- <article v-if = "message.status == 'ยังไม่ได้ทำ'" class="message is-danger">
@@ -47,8 +47,12 @@
       <!-- In Progress -->
       <div class="col-md-4">
         <table width="100%">
-          <tr style="background-color: #00D1B2">
-            <td width="30%" height="100%"><font color="#FFFFFF" size="4"><center>In progress</center></font></td>
+          <tr>
+            <td width="100%" height="100%">
+              <div style="background-color: #272728; padding-top:10px; padding-bottom:10px; box-shadow: 0 0 15px #333;">
+                <font color="#FFFFFF" size="4"><center>In Progress</center></font>
+              </div>
+            </td>
           </tr>
         </table>
         <br>
@@ -71,20 +75,20 @@
                   </div>
                 </div> -->
                 <div v-if = "progress.status == 'กำลังทำ'" class="card" style="width: 20rem;">
-                  <div class="message-header" style="background-color: #F8D7DA">
+                  <div class="message-header" style="background-color: #BFB8C0; padding-top:20px; padding-left:10px;">
                     <p v-show = "progress.date == datetime">
-                      &nbsp;&nbsp;&nbsp;Status : <font color="green"><b>On time</b></font>
-                      Date : {{ progress.dmy }}
+                      <font color="#000000" size="3">Status : </font><font color="green"><b>On time</b></font>
+                      <font color="#000000" size="3">Date : {{ progress.dmy }}</font>
                     </p>
                     <p v-show = "progress.date != datetime">
-                      &nbsp;&nbsp;&nbsp;Status : <font color="red"><b>Delay</b></font>
-                      Date : {{ progress.dmy }}
+                      <font color="#000000" size="3">Status : </font><font color="red"><b>Delay</b></font>
+                      <font color="#000000" size="3">Date : {{ progress.dmy }}</font>
                     </p>
                   </div>
-                  <div class="message-body">
-                    &nbsp;&nbsp;&nbsp;{{ progress.msg }}
-                    <div>
-                      Name : {{ progress.name }}
+                  <div class="message-body" style="padding-top:12px; padding-left:10px;">
+                    <font color="#000000" size="2">&nbsp;&nbsp;&nbsp;{{ progress.msg }}</font>
+                    <div style="padding-top:10px">
+                      <font color="#000000" size="2">Name : {{ progress.name }}</font>
                     </div>
                   </div>
                 </div>
@@ -118,8 +122,12 @@
       <!-- Done -->
       <div class="col-md-4">
         <table width="100%">
-          <tr style="background-color: #00D1B2">
-            <td width="30%" height="100%"><font color="#FFFFFF" size="4"><center>Done</center></font></td>
+          <tr>
+            <td width="100%" height="100%">
+              <div style="background-color: #272728; padding-top:10px; padding-bottom:10px; box-shadow: 0 0 15px #333;">
+                <font color="#FFFFFF" size="4"><center>Done</center></font>
+              </div>
+            </td>
           </tr>
         </table>
         <br>
@@ -143,18 +151,18 @@
                   </div>
                 </div> -->
                 <div v-if = "dodone.status == 'ทำเสร็จแล้ว'" class="card" style="width: 20rem;">
-                  <div class="message-header" style="background-color: #F8D7DA">
+                  <div class="message-header" style="background-color: #BFB8C0; padding-top:20px; padding-left:10px;">
                     <div v-if = "dodone.dash == 'On time'">
-                      <p>&nbsp;&nbsp;&nbsp;Status : <font color="green"><b>{{ dodone.dash }}</b></font></p>
+                      <p><font color="#000000" size="3">Status : </font><font color="green"><b>{{ dodone.dash }}</b></font></p>
                     </div>
                     <div v-if = "dodone.dash == 'Delay'">
-                      <p>&nbsp;&nbsp;&nbsp;Status : <font color="red"><b>{{ dodone.dash }}</b></font></p>
+                      <p><font color="#000000" size="3">Status : </font><font color="red"><b>{{ dodone.dash }}</b></font></p>
                     </div>
                   </div>
-                  <div class="message-body">
-                    &nbsp;&nbsp;&nbsp;{{ dodone.msg }}
+                  <div class="message-body" style="padding-top:12px; padding-left:10px;">
+                    <font color="#000000" size="2">&nbsp;&nbsp;&nbsp;{{ dodone.msg }}</font>
                     <div style="padding-top:10px">
-                      Name : {{ dodone.name }}
+                      <font color="#000000" size="2">Name : {{ dodone.name }}</font>
                     </div>
                   </div>
                 </div>
@@ -242,7 +250,7 @@ export default {
   // Fetches posts when the component is created.
   created () {
     let that = this
-    axios.get('https://graph.facebook.com/138501810233037?fields=feed&access_token=EAACEdEose0cBALgt8D4eBZCWic2ReVNHj0OHsLIRSWQaoJ6bpiWZAmZCHfAcWFoBbVarYguZAllrtUwb4hEmUZBZAcabrpYwHbe1DJUBZBMigl5pKDSO0M3lGhUflyc2Ox7JMmeqGTNZBPxRZA51YaUwoVMiZCz0ETdgNl3W6Yet5427a4ovZCO7QGiBZBhkpNo3omcZD')
+    axios.get('https://graph.facebook.com/138501810233037?fields=feed&access_token=EAACEdEose0cBAD7ikBUNoJNMNw2SNbq0BxAalhMZC94EmewnGkcFwIOJZBmndyIXvD4tEYfKGUrarjMMLq83zxsbdJFtYFvqTSchg9Hmqfs0KECJCEWrnIi7NEZBMPa6R5xuHi6Cl4ZAqwt41YBVZCknTn2pblZAXtuOOA01rfeKqC1onKOGE0bZC5prGl8x9sZD')
     .then(response => {
       this.posts = response.data
       // console.log(this.posts.feed.data)s
@@ -273,7 +281,7 @@ export default {
         }
       })
     })
-    axios.get('https://graph.facebook.com/138501810233037?fields=feed{comments}&access_token=EAACEdEose0cBALgt8D4eBZCWic2ReVNHj0OHsLIRSWQaoJ6bpiWZAmZCHfAcWFoBbVarYguZAllrtUwb4hEmUZBZAcabrpYwHbe1DJUBZBMigl5pKDSO0M3lGhUflyc2Ox7JMmeqGTNZBPxRZA51YaUwoVMiZCz0ETdgNl3W6Yet5427a4ovZCO7QGiBZBhkpNo3omcZD')
+    axios.get('https://graph.facebook.com/138501810233037?fields=feed{comments}&access_token=EAACEdEose0cBAD7ikBUNoJNMNw2SNbq0BxAalhMZC94EmewnGkcFwIOJZBmndyIXvD4tEYfKGUrarjMMLq83zxsbdJFtYFvqTSchg9Hmqfs0KECJCEWrnIi7NEZBMPa6R5xuHi6Cl4ZAqwt41YBVZCknTn2pblZAXtuOOA01rfeKqC1onKOGE0bZC5prGl8x9sZD')
     .then(response => {
       this.comments = response.data
       // console.log(this.comments.feed.data[0].comments.data[0].from.name)
@@ -330,7 +338,7 @@ export default {
 
 <style>
   .tbl-content{
-    height:470px;
+    height:435px;
     overflow-x:auto;
     margin-top: 0px;
     border: 1px solid rgba(255,255,255,0.3);
