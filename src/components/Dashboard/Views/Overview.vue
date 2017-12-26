@@ -7,6 +7,7 @@
           <div class="dashboardone">
             <div class="col-md-12" style="padding-top:1px; padding-left:20px; padding-bottom: 1px;">
               <h4>Summary Operating Results</h4>
+              <input type="text" name="" value="" v-model="count">
             </div>
             <hr>
             <div class="col-md-12" style="padding-top:1px; padding-left:20px; padding-bottom: 1px;">
@@ -18,7 +19,7 @@
             <hr>
             <div style="padding-top:1px; padding-left:20px; padding-bottom: 1px;">
               <i class="fa fa-circle text-info"></i> All Workload : {{ count }} % <br>
-              <i class="fa fa-circle text-danger"></i> To Do : {{ sumall - count }} % <br>
+              <i class="fa fa-circle text-danger"></i> To Do : {{ count - sumall }} % <br>
               <i class="fa fa-circle text-warning"></i> In progress : {{ sumprogress }} % <br>
               <i class="fa fa-circle text-success"></i> Done : {{ donecount }} % <br>
             </div>
@@ -62,7 +63,7 @@
       <br>
 
       <div class="row">
-        <!-- <div class="col-md-6">
+        <div class="col-md-6">
           <chart-card :chart-data="pieChart.data" chart-type="Pie">
             <template slot="header">
               <h4 class="card-title">Email Statistics</h4>
@@ -84,7 +85,7 @@
               </div>
             </template>
           </chart-card>
-        </div> -->
+        </div>
 
         <!-- <div class="col-md-6">
           <chart-card
@@ -268,6 +269,7 @@
             series: [40, 20, 40]
           }
         },
+        sumall: '',
         barChart: {
           data: {
             labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
@@ -316,6 +318,7 @@
       }
     },
     mounted () {
+      console.log('hello')
       let that = this
       that.datetime = Date().substr(8, 2)
       setInterval(() => {
@@ -327,14 +330,16 @@
       }, 1024)
     },
     watch: {
-      count () {
-        this.pieChart.data.series[0] = this.count
+      count (val) {
+        // this.$set(this.pieChart.data.series, 'labels', ['10%', '10%', '80%'])
+        this.pieChart.data.series = [ this.count, 10, 80]
+        this.pieChart.data.labels = [ `${this.count}%`, '10%', '80%']
       }
     },
     // Fetches posts when the component is created.
     created () {
       let that = this
-      axios.get('https://graph.facebook.com/138501810233037?fields=feed&access_token=EAACEdEose0cBAD7ikBUNoJNMNw2SNbq0BxAalhMZC94EmewnGkcFwIOJZBmndyIXvD4tEYfKGUrarjMMLq83zxsbdJFtYFvqTSchg9Hmqfs0KECJCEWrnIi7NEZBMPa6R5xuHi6Cl4ZAqwt41YBVZCknTn2pblZAXtuOOA01rfeKqC1onKOGE0bZC5prGl8x9sZD')
+      axios.get('https://graph.facebook.com/138501810233037?fields=feed&access_token=EAACEdEose0cBADZCi7yrf5SIGoso0joVJDTQAYL318NDioWioOo01kNS8PwitzvJ24xwxRAWZAv5CwS9KtXnuguWNN2oyiTsruJsDXwN6fGpKQQO8JOtM3B0XqWpQq11SiOqmuCmVTJY6OROcHmrZCfPtd0gut063XDluBKXom4NZCw8OoknSjPFXygQJf8ZD')
       .then(response => {
         this.posts = response.data
         // console.log(this.posts.feed.data)s
@@ -371,7 +376,7 @@
           }
         })
       })
-      axios.get('https://graph.facebook.com/138501810233037?fields=feed{comments}&access_token=EAACEdEose0cBAD7ikBUNoJNMNw2SNbq0BxAalhMZC94EmewnGkcFwIOJZBmndyIXvD4tEYfKGUrarjMMLq83zxsbdJFtYFvqTSchg9Hmqfs0KECJCEWrnIi7NEZBMPa6R5xuHi6Cl4ZAqwt41YBVZCknTn2pblZAXtuOOA01rfeKqC1onKOGE0bZC5prGl8x9sZD')
+      axios.get('https://graph.facebook.com/138501810233037?fields=feed{comments}&access_token=EAACEdEose0cBADZCi7yrf5SIGoso0joVJDTQAYL318NDioWioOo01kNS8PwitzvJ24xwxRAWZAv5CwS9KtXnuguWNN2oyiTsruJsDXwN6fGpKQQO8JOtM3B0XqWpQq11SiOqmuCmVTJY6OROcHmrZCfPtd0gut063XDluBKXom4NZCw8OoknSjPFXygQJf8ZD')
       .then(response => {
         this.comments = response.data
         // console.log(this.comments.feed.data[0].comments.data[0].from.name)
@@ -394,9 +399,9 @@
               result.dmy = progress.created_time.substr(0, 10)
               result.name = progress.from.name
               that.progresscount++
-              that.sumall = (that.progresscount + that.donecount)
+              that.sumall = that.sumprogress + that.donecount
               that.sumprogress = that.progresscount - that.donecount
-              that.sumtodo = (that.progresscount + that.donecount)-that.count
+              that.sumtodo = that.count - that.sumall
               that.todo.push(result)
               // if (that.todo.name === 'Apinan Singbut') {
               //   that.ApinanA++
@@ -488,7 +493,7 @@
   .dashboardone{ /*บล๊อขาว*/
     margin: auto; /*บล๊อกอยู่กลาง*/
     width: 90%;
-    height: 510px;
+    height: 550px;
     border-radius: 2px; /*ความโค้งมนของขอบบล๊อก*/
     box-shadow: 0 0 15px #333 ; /*เงาของบล๊อก*/
     background: #FFF; /*สีบล๊อก*/

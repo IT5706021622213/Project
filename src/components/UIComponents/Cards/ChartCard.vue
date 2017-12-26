@@ -48,6 +48,17 @@
         chart: null
       }
     },
+    watch: {
+      chartData: {
+        handler: function (val){
+           // do stuff
+           console.log(val, 'chartData')
+           var chartIdQuery = `#${this.chartId}`
+           this.chart = this.$Chartist[this.chartType](chartIdQuery, val, this.chartOptions, this.responsiveOptions)
+        },
+        deep: true
+      }
+    },
     methods: {
       /***
        * Initializes the chart by merging the chart options sent via props and the default chart options
@@ -129,6 +140,7 @@
       const Chartist = await import('chartist')
       this.$Chartist = Chartist
       this.initChart()
+      console.log('hello card')
     }
   }
 </script>

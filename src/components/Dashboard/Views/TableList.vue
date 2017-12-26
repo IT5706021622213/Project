@@ -250,7 +250,7 @@ export default {
   // Fetches posts when the component is created.
   created () {
     let that = this
-    axios.get('https://graph.facebook.com/138501810233037?fields=feed&access_token=EAACEdEose0cBAD7ikBUNoJNMNw2SNbq0BxAalhMZC94EmewnGkcFwIOJZBmndyIXvD4tEYfKGUrarjMMLq83zxsbdJFtYFvqTSchg9Hmqfs0KECJCEWrnIi7NEZBMPa6R5xuHi6Cl4ZAqwt41YBVZCknTn2pblZAXtuOOA01rfeKqC1onKOGE0bZC5prGl8x9sZD')
+    axios.get('https://graph.facebook.com/138501810233037?fields=feed&access_token=EAACEdEose0cBADZCi7yrf5SIGoso0joVJDTQAYL318NDioWioOo01kNS8PwitzvJ24xwxRAWZAv5CwS9KtXnuguWNN2oyiTsruJsDXwN6fGpKQQO8JOtM3B0XqWpQq11SiOqmuCmVTJY6OROcHmrZCfPtd0gut063XDluBKXom4NZCw8OoknSjPFXygQJf8ZD')
     .then(response => {
       this.posts = response.data
       // console.log(this.posts.feed.data)s
@@ -281,7 +281,7 @@ export default {
         }
       })
     })
-    axios.get('https://graph.facebook.com/138501810233037?fields=feed{comments}&access_token=EAACEdEose0cBAD7ikBUNoJNMNw2SNbq0BxAalhMZC94EmewnGkcFwIOJZBmndyIXvD4tEYfKGUrarjMMLq83zxsbdJFtYFvqTSchg9Hmqfs0KECJCEWrnIi7NEZBMPa6R5xuHi6Cl4ZAqwt41YBVZCknTn2pblZAXtuOOA01rfeKqC1onKOGE0bZC5prGl8x9sZD')
+    axios.get('https://graph.facebook.com/138501810233037?fields=feed{comments}&access_token=EAACEdEose0cBADZCi7yrf5SIGoso0joVJDTQAYL318NDioWioOo01kNS8PwitzvJ24xwxRAWZAv5CwS9KtXnuguWNN2oyiTsruJsDXwN6fGpKQQO8JOtM3B0XqWpQq11SiOqmuCmVTJY6OROcHmrZCfPtd0gut063XDluBKXom4NZCw8OoknSjPFXygQJf8ZD')
     .then(response => {
       this.comments = response.data
       // console.log(this.comments.feed.data[0].comments.data[0].from.name)
