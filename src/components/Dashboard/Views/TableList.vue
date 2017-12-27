@@ -2,6 +2,37 @@
   <div class="content">
     <div class="row">
       <!-- To Do -->
+      <div class="col-md-12">
+        <table class="table">
+          <thead class="thead-light" style="box-shadow: 0 0 15px #333;">
+            <tr>
+              <th scope="col" style="padding-top:15px; padding-bottom:15px;"><center><font size="3">To Do</font></center></th>
+              <th scope="col" style="padding-top:15px; padding-bottom:15px;"><center><font size="3">In Progress</font></center></th>
+              <th scope="col" style="padding-top:15px; padding-bottom:15px;"><center><font size="3">Done</font></center></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="alert alert-primary" role="alert">
+                  This is a primary alert—check it out!
+                </div>
+              </td>
+              <td>
+                <div class="alert alert-warning" role="alert">
+                  This is a warning alert—check it out!
+                </div>
+              </td>
+              <td>
+                <div class="alert alert-success" role="alert">
+                  This is a success alert—check it out!
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
       <div class="col-md-4">
         <table width="100%">
           <tr>
@@ -22,7 +53,7 @@
                 </div> -->
                 <div v-if = "message.status == 'ยังไม่ได้ทำ'" class="card" style="width: 20rem;">
                   <div class="message-header" style="background-color: #BFB8C0; padding-top:20px; padding-left:10px;">
-                    <p><font color="#000000" size="3">Status : </font><font color="#EEBA34" size="3"><b>Wait</b></font></p>
+                    <p><font color="#000000" size="3">Status : </font><font color="#EEBA34" size="3"><b>Waiting</b></font></p>
                   </div>
                   <div class="message-body" style="padding-top:12px; padding-left:10px;">
                     <font color="#000000" size="2">&nbsp;&nbsp;&nbsp;{{ message.msg }}</font>
@@ -250,7 +281,7 @@ export default {
   // Fetches posts when the component is created.
   created () {
     let that = this
-    axios.get('https://graph.facebook.com/138501810233037?fields=feed&access_token=EAACEdEose0cBADZCi7yrf5SIGoso0joVJDTQAYL318NDioWioOo01kNS8PwitzvJ24xwxRAWZAv5CwS9KtXnuguWNN2oyiTsruJsDXwN6fGpKQQO8JOtM3B0XqWpQq11SiOqmuCmVTJY6OROcHmrZCfPtd0gut063XDluBKXom4NZCw8OoknSjPFXygQJf8ZD')
+    axios.get('https://graph.facebook.com/138501810233037?fields=feed&access_token=EAACEdEose0cBALcRP1StkZCQhPMfZAtKeFjTloneONNldfDLPxhKqqIW903pDPegzVW94ZAJJ4qiuUNO5X5a3yZAu7IftGWgvvOGI6IyvoD4jGqVr00IZABX00xUNaCrXZBXZCtBaK8h5lGUrZBnZApZBLvZAMESshOGugjmMYFo50jZB7rhJT8YZBf88Siq5Wr7FvGwZD')
     .then(response => {
       this.posts = response.data
       // console.log(this.posts.feed.data)s
@@ -281,7 +312,7 @@ export default {
         }
       })
     })
-    axios.get('https://graph.facebook.com/138501810233037?fields=feed{comments}&access_token=EAACEdEose0cBADZCi7yrf5SIGoso0joVJDTQAYL318NDioWioOo01kNS8PwitzvJ24xwxRAWZAv5CwS9KtXnuguWNN2oyiTsruJsDXwN6fGpKQQO8JOtM3B0XqWpQq11SiOqmuCmVTJY6OROcHmrZCfPtd0gut063XDluBKXom4NZCw8OoknSjPFXygQJf8ZD')
+    axios.get('https://graph.facebook.com/138501810233037?fields=feed{comments}&access_token=EAACEdEose0cBALcRP1StkZCQhPMfZAtKeFjTloneONNldfDLPxhKqqIW903pDPegzVW94ZAJJ4qiuUNO5X5a3yZAu7IftGWgvvOGI6IyvoD4jGqVr00IZABX00xUNaCrXZBXZCtBaK8h5lGUrZBnZApZBLvZAMESshOGugjmMYFo50jZB7rhJT8YZBf88Siq5Wr7FvGwZD')
     .then(response => {
       this.comments = response.data
       // console.log(this.comments.feed.data[0].comments.data[0].from.name)

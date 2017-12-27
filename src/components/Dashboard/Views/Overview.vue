@@ -2,207 +2,108 @@
   <div class="content">
     <div class="container-fluid">
       <div class="row">
-
-        <div class="col-md-6">
-          <div class="dashboardone">
-            <div class="col-md-12" style="padding-top:1px; padding-left:20px; padding-bottom: 1px;">
-              <h4>Summary Operating Results</h4>
-              <input type="text" name="" value="" v-model="count">
-            </div>
-            <hr>
-            <div class="col-md-12" style="padding-top:1px; padding-left:20px; padding-bottom: 1px;">
-              <progress class="progress is-info" v-bind:value="count" max="30"> {{ count }} %</progress>
-              <progress class="progress is-danger" v-bind:value="sumtodo" max="30"> {{ sumall - count }} %</progress>
-              <progress class="progress is-warning" v-bind:value="sumprogress" max="30"> {{ sumprogress }} %</progress>
-              <progress class="progress is-success" v-bind:value="donecount" max="30"> {{ donecount }} %</progress>
-            </div>
-            <hr>
-            <div style="padding-top:1px; padding-left:20px; padding-bottom: 1px;">
-              <i class="fa fa-circle text-info"></i> All Workload : {{ count }} % <br>
-              <i class="fa fa-circle text-danger"></i> To Do : {{ count - sumall }} % <br>
-              <i class="fa fa-circle text-warning"></i> In progress : {{ sumprogress }} % <br>
-              <i class="fa fa-circle text-success"></i> Done : {{ donecount }} % <br>
-            </div>
-          </div>
+        <div class="col-md-3" style="background-color: #FFFFFF; box-shadow: 0 0 1px #888;" align="center">
+          <h4 class="card-title">All Job</h4>
+          {{ count }}
+          <p class="card-category">Job</p>
         </div>
 
-        <div class="col-md-6">
-          <div class="dashboardone">
-            <div class="col-md-12" style="padding-top:1px; padding-left:20px; padding-bottom: 1px;">
-              <h4>Performance Report</h4>
-            </div>
-            <hr>
-            <div class="col-md-12" style="padding-top:1px; padding-left:20px; padding-bottom: 1px;">
-              <progress class="progress is-info" v-bind:value="PerformanceA" max="30"> {{ PerformanceA }} %</progress>
-              <progress class="progress is-warning" v-bind:value="PerformanceSum" max="30"> {{ PerformanceSum }} %</progress>
-              <progress class="progress is-success" v-bind:value="PerformanceB" max="30"> {{ PerformanceB }} %</progress>
-              <progress class="progress is-primary" v-bind:value="PerformanceOnTime" max="30"> {{ PerformanceOnTime }} %</progress>
-              <progress class="progress is-danger" v-bind:value="PerformanceDelay" max="30"> {{ PerformanceDelay }} %</progress>
-            </div>
-            <hr>
-            <div style="padding-top:1px; padding-left:20px; padding-bottom: 1px;">
-              <i class="fa fa-circle text-info"></i> All work is done : {{ PerformanceA }} % <br>
-              <i class="fa fa-circle text-warning"></i> All work is doing : {{ PerformanceA - PerformanceB }} % <br>
-              <i class="fa fa-circle text-success"></i> All work is success : {{ PerformanceB }} % <br>
-              <i class="fa fa-circle text-primary"></i> All work done on time : {{ PerformanceOnTime }} % <br>
-              <i class="fa fa-circle text-danger"></i> All work done is delayed : {{ PerformanceDelay }} % <br>
-              <div style="padding-top:10px;" align="center">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalA">
-                  Apinan Singbut
-                </button>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalB">
-                  P'Tang Ratabhoom Boongate
-                </button>
-              </div>
-            </div>
-          </div>
+        <div class="col-md-3" style="background-color: #FFFFFF; box-shadow: 0 0 1px #888;" align="center">
+          <h4 class="card-title">To Do</h4>
+          {{ todocount }}
+          <p class="card-category">Job</p>
         </div>
 
+        <div class="col-md-3" style="background-color: #FFFFFF; box-shadow: 0 0 1px #888;" align="center">
+          <h4 class="card-title">In Progress</h4>
+          {{ doneprogress }}
+          <p class="card-category">Job</p>
+        </div>
+
+        <div class="col-md-3" style="background-color: #FFFFFF; box-shadow: 0 0 1px #888;" align="center">
+          <h4 class="card-title">Done</h4>
+          {{ donecount }}
+          <p class="card-category">Job</p>
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+      <div class="col-md-6">
+        <chart-card
+          :chart-data="barChart.data"
+          :chart-options="barChart.options"
+          :chart-responsive-options="barChart.responsiveOptions"
+          chart-type="Bar">
+          <template slot="header">
+            <h4 class="card-title">2014 Sales</h4>
+            <p class="card-category">All products including Taxes</p>
+          </template>
+          <template slot="footer">
+            <div class="legend">
+              <i class="fa fa-circle text-info"></i> Tesla Model S
+              <i class="fa fa-circle text-danger"></i> BMW 5 Series
+            </div>
+            <hr>
+            <div class="stats">
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalB">
+                Launch demo modal B
+              </button>
+            </div>
+          </template>
+        </chart-card>
       </div>
 
-      <br>
-
-      <div class="row">
-        <div class="col-md-6">
-          <chart-card :chart-data="pieChart.data" chart-type="Pie">
-            <template slot="header">
-              <h4 class="card-title">Email Statistics</h4>
-              <p class="card-category">Last Campaign Performance</p>
-            </template>
-            <template slot="footer">
-              <div class="legend">
-                <i class="fa fa-circle text-info"></i> Open
-                <i class="fa fa-circle text-danger"></i> Bounce
-                <i class="fa fa-circle text-warning"></i> Unsubscribe
-              </div>
-              <hr>
-              <div class="stats">
-
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalA">
-                  Launch demo modal A
-                </button>
-
-              </div>
-            </template>
-          </chart-card>
-        </div>
-
-        <!-- <div class="col-md-6">
-          <chart-card
-            :chart-data="barChart.data"
-            :chart-options="barChart.options"
-            :chart-responsive-options="barChart.responsiveOptions"
-            chart-type="Bar">
-            <template slot="header">
-              <h4 class="card-title">2014 Sales</h4>
-              <p class="card-category">All products including Taxes</p>
-            </template>
-            <template slot="footer">
-              <div class="legend">
-                <i class="fa fa-circle text-info"></i> Tesla Model S
-                <i class="fa fa-circle text-danger"></i> BMW 5 Series
-              </div>
-              <hr>
-              <div class="stats">
-
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalB">
-                  Launch demo modal B
-                </button>
-
-              </div>
-            </template>
-          </chart-card>
-        </div> -->
-
-        <!-- งานทั้งหมด : {{ count }} <br>
-        To Do : {{ sumall - count }}<br>
-        In Progress : {{ sumprogress }} <br>
-        Done : {{ donecount }}<br><br> -->
-
-        <!-- Performance<br>
-        งานทั้งหมดที่มีคนทำ : {{ PerformanceA }}<br>
-        งานทั้งหมดที่กำลังทำอยู่ : {{ PerformanceA - PerformanceB }}<br>
-        งานทั้งหมดที่ทำเสร็จแล้ว : {{ PerformanceB }}<br>
-        งานทั้งหมดที่ทำเสร็จตามเวลา : {{ PerformanceOnTime }}<br>
-        งานทั้งหมดที่ทำเสร็จล่าช้า : {{ PerformanceDelay }}<br><br>
-
-        Apinan Singbut<br>
-        งานทั้งหมดที่ Apinan เป็นคนทำ : {{ ApinanA }}<br>
-        งานทั้งหมดที่ Apinan กำลังทำอยู่ : {{ ApinanA - ApinanB }}<br>
-        งานทั้งหมดที่ Apinan ทำเสร็จแล้ว : {{ ApinanB }}<br>
-        งานทั้งหมดที่ Apinan ทำเสร็จตามเวลา : {{ ApinanOnTime }}<br>
-        งานทั้งหมดที่ Apinan ทำเสร็จล่าช้า : {{ ApinanDelay }}<br><br>
-
-        P'Tang Ratabhoom Boongate<br>
-        งานทั้งหมดที่ P'Tang Ratabhoom Boongate เป็นคนทำ : {{ TangA }}<br>
-        งานทั้งหมดที่ P'Tang Ratabhoom Boongate กำลังทำอยู่ : {{ TangA - TangB }}<br>
-        งานทั้งหมดที่ P'Tang Ratabhoom Boongate ทำเสร็จแล้ว : {{ TangB }}<br>
-        งานทั้งหมดที่ P'Tang Ratabhoom Boongate ทำเสร็จตามเวลา : {{ TangOnTime }}<br>
-        งานทั้งหมดที่ P'Tang Ratabhoom Boongate ทำเสร็จล่าช้า : {{ TangDelay }}<br> -->
-
-        <!-- Modal A -->
-        <div class="modal fade" id="exampleModalA" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Apinan Singbut</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <progress class="progress is-info" v-bind:value="ApinanA" max="30"> {{ ApinanA }} %</progress>
-                <progress class="progress is-warning" v-bind:value="ApinanA" max="30"> {{ ApinanSum }} %</progress>
-                <progress class="progress is-success" v-bind:value="ApinanB" max="30"> {{ ApinanB }} %</progress>
-                <progress class="progress is-primary" v-bind:value="ApinanOnTime" max="30"> {{ ApinanOnTime }} %</progress>
-                <progress class="progress is-danger" v-bind:value="ApinanDelay" max="30"> {{ ApinanDelay }} %</progress>
-                <hr>
-                <i class="fa fa-circle text-info"></i> All work at Apinan Singbut is done : {{ ApinanA }} % <br>
-                <i class="fa fa-circle text-warning"></i> All the work that Apinan Singbut is doing : {{ ApinanA - ApinanB }} % <br>
-                <i class="fa fa-circle text-success"></i> All work at Apinan Singbut is success : {{ ApinanB }} % <br>
-                <i class="fa fa-circle text-primary"></i> All work at Apinan Singbut is Finished in time : {{ ApinanOnTime }} % <br>
-                <i class="fa fa-circle text-danger"></i> All work at Apinan Singbut is Delayed : {{ ApinanDelay }} % <br>
-              </div>
-              <div class="modal-footer">
-
-              </div>
+      <div class="col-md-6">
+        <chart-card :chart-data="pieChart.data" chart-type="Pie">
+          <template slot="header">
+            <h4 class="card-title">Email Statistics</h4>
+            <p class="card-category">Last Campaign Performance</p>
+          </template>
+          <template slot="footer">
+            <div class="legend">
+              <i class="fa fa-circle text-info"></i> To Do
+              <i class="fa fa-circle text-danger"></i> In progress
+              <i class="fa fa-circle text-warning"></i> Done
             </div>
-          </div>
-        </div>
-        <!-- End Modal A -->
-
-        <!-- Modal B -->
-        <div class="modal fade" id="exampleModalB" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">P'Tang Ratabhoom Boongate</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <progress class="progress is-info" v-bind:value="TangA" max="30"> {{ TangA }} %</progress>
-                <progress class="progress is-warning" v-bind:value="TangSum" max="30"> {{ TangSum }} %</progress>
-                <progress class="progress is-success" v-bind:value="TangB" max="30"> {{ TangB }} %</progress>
-                <progress class="progress is-primary" v-bind:value="TangOnTime" max="30"> {{ TangOnTime }} %</progress>
-                <progress class="progress is-danger" v-bind:value="TangDelay" max="30"> {{ TangDelay }} %</progress>
-                <hr>
-                <i class="fa fa-circle text-info"></i> All work at P'Tang Ratabhoom Boongate is done : {{ TangA }} % <br>
-                <i class="fa fa-circle text-warning"></i> All the work that P'Tang Ratabhoom Boongate is doing : {{ TangA - TangB }} % <br>
-                <i class="fa fa-circle text-success"></i> All work at P'Tang Ratabhoom Boongate is success : {{ TangB }} % <br>
-                <i class="fa fa-circle text-primary"></i> All work at P'Tang Ratabhoom Boongate is Finished in time : {{ TangOnTime }} % <br>
-                <i class="fa fa-circle text-danger"></i> All work at P'Tang Ratabhoom Boongate is Delayed : {{ TangDelay }} % <br>
-              </div>
-              <div class="modal-footer">
-
-              </div>
+            <hr>
+            <div class="stats">
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalA">
+                Launch demo modal A
+              </button>
             </div>
-          </div>
-        </div>
-        <!-- End Modal B -->
-
+          </template>
+        </chart-card>
       </div>
+
+      <!-- งานทั้งหมด : {{ count }} <br>
+      To Do : {{ sumall - count }}<br>
+      In Progress : {{ sumprogress }} <br>
+      Done : {{ donecount }}<br><br> -->
+
+      <!-- Performance<br>
+      งานทั้งหมดที่มีคนทำ : {{ PerformanceA }}<br>
+      งานทั้งหมดที่กำลังทำอยู่ : {{ PerformanceA - PerformanceB }}<br>
+      งานทั้งหมดที่ทำเสร็จแล้ว : {{ PerformanceB }}<br>
+      งานทั้งหมดที่ทำเสร็จตามเวลา : {{ PerformanceOnTime }}<br>
+      งานทั้งหมดที่ทำเสร็จล่าช้า : {{ PerformanceDelay }}<br><br> -->
+
+      <!-- Apinan Singbut<br>
+      งานทั้งหมดที่ Apinan เป็นคนทำ : {{ ApinanA }}<br>
+      งานทั้งหมดที่ Apinan กำลังทำอยู่ : {{ ApinanA - ApinanB }}<br>
+      งานทั้งหมดที่ Apinan ทำเสร็จแล้ว : {{ ApinanB }}<br>
+      งานทั้งหมดที่ Apinan ทำเสร็จตามเวลา : {{ ApinanOnTime }}<br>
+      งานทั้งหมดที่ Apinan ทำเสร็จล่าช้า : {{ ApinanDelay }}<br><br> -->
+
+      <!-- P'Tang Ratabhoom Boongate<br>
+      งานทั้งหมดที่ P'Tang Ratabhoom Boongate เป็นคนทำ : {{ TangA }}<br>
+      งานทั้งหมดที่ P'Tang Ratabhoom Boongate กำลังทำอยู่ : {{ TangA - TangB }}<br>
+      งานทั้งหมดที่ P'Tang Ratabhoom Boongate ทำเสร็จแล้ว : {{ TangB }}<br>
+      งานทั้งหมดที่ P'Tang Ratabhoom Boongate ทำเสร็จตามเวลา : {{ TangOnTime }}<br>
+      งานทั้งหมดที่ P'Tang Ratabhoom Boongate ทำเสร็จล่าช้า : {{ TangDelay }}<br> -->
+
     </div>
   </div>
 </template>
@@ -236,9 +137,8 @@
         testy: 'hello',
         count: 0,
         todocount: 0,
-        sumtodo: 0,
         progresscount: 0,
-        sumprogress: 0,
+        doneprogress: 0,
         donecount: 0,
         feedid: 0,
 
@@ -272,10 +172,13 @@
         sumall: '',
         barChart: {
           data: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            labels: ['User A'],
             series: [
-              [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895],
-              [412, 243, 280, 580, 453, 353, 300, 364, 368, 410, 636, 695]
+              [30],
+              [10],
+              [50],
+              [20],
+              [40]
             ]
           },
           options: {
@@ -318,7 +221,6 @@
       }
     },
     mounted () {
-      console.log('hello')
       let that = this
       that.datetime = Date().substr(8, 2)
       setInterval(() => {
@@ -330,22 +232,32 @@
       }, 1024)
     },
     watch: {
-      count (val) {
+      todocount () {
         // this.$set(this.pieChart.data.series, 'labels', ['10%', '10%', '80%'])
-        this.pieChart.data.series = [ this.count, 10, 80]
-        this.pieChart.data.labels = [ `${this.count}%`, '10%', '80%']
+        this.pieChart.data.series = [ this.todocount, this.doneprogress, this.donecount]
+        this.pieChart.data.labels = [ `${this.todocount}`, `${this.doneprogress}`, `${this.donecount}`]
+      },
+      ApinanA () {
+        // this.$set(this.pieChart.data.series, 'labels', ['10%', '10%', '80%'])
+        this.barChart.data.series = [
+          [this.PerformanceA],
+          [this.PerformanceSum],
+          [this.PerformanceB],
+          [this.PerformanceOnTime],
+          [this.PerformanceDelay]
+        ]
       }
     },
     // Fetches posts when the component is created.
     created () {
       let that = this
-      axios.get('https://graph.facebook.com/138501810233037?fields=feed&access_token=EAACEdEose0cBADZCi7yrf5SIGoso0joVJDTQAYL318NDioWioOo01kNS8PwitzvJ24xwxRAWZAv5CwS9KtXnuguWNN2oyiTsruJsDXwN6fGpKQQO8JOtM3B0XqWpQq11SiOqmuCmVTJY6OROcHmrZCfPtd0gut063XDluBKXom4NZCw8OoknSjPFXygQJf8ZD')
+      axios.get('https://graph.facebook.com/138501810233037?fields=feed&access_token=EAACEdEose0cBALcRP1StkZCQhPMfZAtKeFjTloneONNldfDLPxhKqqIW903pDPegzVW94ZAJJ4qiuUNO5X5a3yZAu7IftGWgvvOGI6IyvoD4jGqVr00IZABX00xUNaCrXZBXZCtBaK8h5lGUrZBnZApZBLvZAMESshOGugjmMYFo50jZB7rhJT8YZBf88Siq5Wr7FvGwZD')
       .then(response => {
         this.posts = response.data
         // console.log(this.posts.feed.data)s
         // let cut = posts => this.posts.filter(this.posts.feed.data.message.substr(0, 5) === '#ToDo')
-
         this.posts.feed.data.forEach(function (message) {
+          // To Do
           if (message.message.substr(0, 5) === '#ToDo') {
             let newmessage = {
               id: message.id,
@@ -363,81 +275,77 @@
             that.done.push(newmessage)
             that.count++
             that.test = that.count
-
             // if (that.todo.status === 'กำลังทำ') {
             //   console.log('connect')
             // }
-
             // console.log(that.test.id)
             // that.todo.push(message.message.substr(6))
             // that.todo.push(message.id)
             // that.feedid = message.id
             // console.log(that.feedid)
           }
+          // End To Do
         })
       })
-      axios.get('https://graph.facebook.com/138501810233037?fields=feed{comments}&access_token=EAACEdEose0cBADZCi7yrf5SIGoso0joVJDTQAYL318NDioWioOo01kNS8PwitzvJ24xwxRAWZAv5CwS9KtXnuguWNN2oyiTsruJsDXwN6fGpKQQO8JOtM3B0XqWpQq11SiOqmuCmVTJY6OROcHmrZCfPtd0gut063XDluBKXom4NZCw8OoknSjPFXygQJf8ZD')
+      axios.get('https://graph.facebook.com/138501810233037?fields=feed{comments}&access_token=EAACEdEose0cBALcRP1StkZCQhPMfZAtKeFjTloneONNldfDLPxhKqqIW903pDPegzVW94ZAJJ4qiuUNO5X5a3yZAu7IftGWgvvOGI6IyvoD4jGqVr00IZABX00xUNaCrXZBXZCtBaK8h5lGUrZBnZApZBLvZAMESshOGugjmMYFo50jZB7rhJT8YZBf88Siq5Wr7FvGwZD')
       .then(response => {
         this.comments = response.data
         // console.log(this.comments.feed.data[0].comments.data[0].from.name)
         // console.log(this.comments.feed.data[0].comments.data[0].message)
         this.comments.feed.data.forEach(function (comment) {
           // let result = that.todo.find(item => item === comment.fields
-          // console.log(result);
+          // console.log(result)
           // that.progress.push(result)
           // console.log(comment.id)
           comment.comments.data.forEach(function (progress) {
-            // console.log(progress.message);
-            // console.log(progress.from.name);ssssssssss
-
+            // console.log(progress.message)
+            // console.log(progress.from.name)
             // comment start
+
+            // In Progress
             if (progress.message === '#start') {
               let result = that.todo.find(item => item.id === comment.id)
-
               result.status = 'กำลังทำ'
               result.date = progress.created_time.substr(8, 2)
               result.dmy = progress.created_time.substr(0, 10)
               result.name = progress.from.name
               that.progresscount++
-              that.sumall = that.sumprogress + that.donecount
-              that.sumprogress = that.progresscount - that.donecount
-              that.sumtodo = that.count - that.sumall
+              that.sumall = that.doneprogress + that.donecount
+              that.doneprogress = that.progresscount - that.donecount
+              // doneprogress : In Progress
+              that.todocount = that.count - that.progresscount
+              // todocount : To Do
               that.todo.push(result)
-              // if (that.todo.name === 'Apinan Singbut') {
-              //   that.ApinanA++
-              //   console.log(that.ApinanA)
-              // }
 
-              // console.log(that.datetime)
+              console.log(that.todocount)
+              console.log('scrum')
               // console.log(that.test.id)
-
             }
-            // End comment start
+            // End In progress
+
+            // Done
             if (progress.message === '#end') {
               let result = that.todo.find(item => item.id === comment.id)
               if (result.status === 'กำลังทำ') {
+                result.status = 'ทำเสร็จแล้ว'
+                result.ondelay = progress.created_time.substr(8, 2)
+                if (result.date === result.ondelay) {
+                  result.dash = 'On time'
+                }
+                else {
+                  result.dash = 'Delay'
+                }
+                that.donecount++
+                // donecount : Done
+                that.todo.push(result)
 
-
-              result.status = 'ทำเสร็จแล้ว'
-              result.ondelay = progress.created_time.substr(8, 2)
-              if (result.date === result.ondelay) {
-                result.dash = 'On time'
-
+                // console.log(result.status)
+                // console.log(that.test.id)
               }
-              else {
-                result.dash = 'Delay'
-
-              }
-              // console.log(result.status)
-              that.donecount++
-              that.todo.push(result)
-
-              // console.log(that.test.id)sssหsss
             }
-            }
+            // End Done
 
             let results = that.todo.find(item => item.id === comment.id)
-            console.log(results.status)
             if (results.status === 'กำลังทำ') {
               that.PerformanceA++
             }
@@ -493,7 +401,7 @@
   .dashboardone{ /*บล๊อขาว*/
     margin: auto; /*บล๊อกอยู่กลาง*/
     width: 90%;
-    height: 550px;
+    height: 150px;
     border-radius: 2px; /*ความโค้งมนของขอบบล๊อก*/
     box-shadow: 0 0 15px #333 ; /*เงาของบล๊อก*/
     background: #FFF; /*สีบล๊อก*/

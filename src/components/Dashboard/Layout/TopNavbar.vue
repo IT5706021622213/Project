@@ -1,7 +1,7 @@
 <template>
-  <nav class="navbar navbar-expand-lg" style="background-color: #272728">
+  <nav class="navbar navbar-expand-lg" style="background-color: #F2F6FC">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#"><font color="#FFF" size="2">Workload status tracking system based on Scrum solution via posts upon Facebook page</font></a>
+      <a class="navbar-brand" href="#"><font color="#000000" size="2">Workload status tracking system based on </font><font color="#002089" size="2">Scrum</font><font color="#000000" size="2"> solution via posts upon </font><font color="#002089" size="2">Facebook</font><font color="#000000" size="2"> page. </font></a>
     </div>
   </nav>
 </template>

@@ -52,7 +52,7 @@
       chartData: {
         handler: function (val){
            // do stuff
-           console.log(val, 'chartData')
+           // console.log(val, 'chartData')
            var chartIdQuery = `#${this.chartId}`
            this.chart = this.$Chartist[this.chartType](chartIdQuery, val, this.chartOptions, this.responsiveOptions)
         },
@@ -140,7 +140,6 @@
       const Chartist = await import('chartist')
       this.$Chartist = Chartist
       this.initChart()
-      console.log('hello card')
     }
   }
 </script>
