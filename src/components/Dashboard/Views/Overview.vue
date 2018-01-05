@@ -3,27 +3,27 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-3" style="background-color: #FFFFFF; box-shadow: 0 0 1px #888;" align="center">
-          <h4 class="card-title">All Job</h4>
+          <h4 style="font-weight: 300; padding-top:15px;">All Job</h4>
           {{ count }}
-          <p class="card-category">Job</p>
+          <p style="font-weight: 300;">Job</p>
         </div>
 
         <div class="col-md-3" style="background-color: #FFFFFF; box-shadow: 0 0 1px #888;" align="center">
-          <h4 class="card-title">To Do</h4>
+          <h4 style="font-weight: 300; padding-top:15px;">To Do</h4>
           {{ todocount }}
-          <p class="card-category">Job</p>
+          <p style="font-weight: 300;">Job</p>
         </div>
 
         <div class="col-md-3" style="background-color: #FFFFFF; box-shadow: 0 0 1px #888;" align="center">
-          <h4 class="card-title">In Progress</h4>
-          {{ doneprogress }}
-          <p class="card-category">Job</p>
+          <h4 style="font-weight: 300; padding-top:15px;">In Progress</h4>
+          {{ PerformanceInProgress }}
+          <p style="font-weight: 300;">Job</p>
         </div>
 
         <div class="col-md-3" style="background-color: #FFFFFF; box-shadow: 0 0 1px #888;" align="center">
-          <h4 class="card-title">Done</h4>
+          <h4 style="font-weight: 300; padding-top:15px;">Done</h4>
           {{ donecount }}
-          <p class="card-category">Job</p>
+          <p style="font-weight: 300;">Job</p>
         </div>
       </div>
     </div>
@@ -31,7 +31,7 @@
     <br>
 
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-4">
         <chart-card
           :chart-data="barChart.data"
           :chart-options="barChart.options"
@@ -42,41 +42,87 @@
             <p class="card-category">All products including Taxes</p>
           </template>
           <template slot="footer">
-            <div class="legend">
-              <i class="fa fa-circle text-info"></i> Tesla Model S
-              <i class="fa fa-circle text-danger"></i> BMW 5 Series
+            <div class="legend" style="margin-top: -25px;">
+              <i class="fa fa-circle" style="color:#1DC7EA"></i> งานทั้งหมดที่มีคนทำ : {{ PerformanceA }} งาน<br>
+              <i class="fa fa-circle" style="color:#FB404B"></i> งานทั้งหมดที่กำลังทำอยู่ : {{ PerformanceInProgress }} งาน<br>
+              <i class="fa fa-circle" style="color:#FFA534"></i> งานทั้งหมดที่ทำเสร็จแล้ว : {{ PerformanceDone }} งาน<br>
+              <i class="fa fa-circle" style="color:#9368E9"></i> งานทั้งหมดที่ทำเสร็จตามเวลา : {{ PerformanceOnTime }} งาน<br>
+              <i class="fa fa-circle" style="color:#87CB16"></i> งานทั้งหมดที่ทำเสร็จล่าช้า : {{ PerformanceDelay }} งาน<br>
             </div>
-            <hr>
             <div class="stats">
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalB">
+              <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalB">
                 Launch demo modal B
-              </button>
+              </button> -->
             </div>
           </template>
         </chart-card>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-md-4">
         <chart-card :chart-data="pieChart.data" chart-type="Pie">
           <template slot="header">
             <h4 class="card-title">Email Statistics</h4>
             <p class="card-category">Last Campaign Performance</p>
           </template>
           <template slot="footer">
-            <div class="legend">
-              <i class="fa fa-circle text-info"></i> To Do
-              <i class="fa fa-circle text-danger"></i> In progress
-              <i class="fa fa-circle text-warning"></i> Done
+            <div class="legend" style="margin-top: -25px; padding-bottom: 65px;">
+              <i class="fa fa-circle" style="color:#1DC7EA"></i> To Do : {{ todocount }} Job<br>
+              <i class="fa fa-circle" style="color:#FB404B"></i> In progress : {{ PerformanceInProgress }} Job<br>
+              <i class="fa fa-circle" style="color:#FFA534"></i> Done : {{ PerformanceDone }} Job<br>
             </div>
-            <hr>
             <div class="stats">
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalA">
+              <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalA">
                 Launch demo modal A
-              </button>
+              </button> -->
             </div>
           </template>
         </chart-card>
       </div>
+
+      <div class="col-md-4">
+        <div class="col-md-12" style="background-color: #FFFFFF; box-shadow: 0 0 1px #888; padding-bottom: 35px;">
+          <h4 style="font-weight: 300; padding-top:15px;">2014 Sales</h4>
+          <p style="font-size: 14px; font-weight: 400; color: #9A9A9A; margin-top: -6px;">All products including Taxes</p>
+          <section>
+            <h4 style="font-weight: 300;">Apinan Singbut : {{ progress1 }} Job</h4>
+            <div style="font-size: 14px; font-weight: 400; color: #9A9A9A; margin-top: -6px; padding-bottom: 10px;">Position : Personnel</div>
+            <progress-bar v-model="progress1"/>
+            <h4 style="font-weight: 300; padding-top: 10px;">Personnel B : {{ progress2 }} Job</h4>
+            <div style="font-size: 14px; font-weight: 400; color: #9A9A9A; margin-top: -6px; padding-bottom: 10px;">Position : Personnel</div>
+            <progress-bar v-model="progress2"/>
+            <h4 style="font-weight: 300; padding-top: 10px;">Personnel C : {{ progress3 }} Job</h4>
+            <div style="font-size: 14px; font-weight: 400; color: #9A9A9A; margin-top: -6px; padding-bottom: 10px;">Position : Personnel</div>
+            <progress-bar v-model="progress3"/>
+            <h4 style="font-weight: 300; padding-top: 10px;">Personnel D : {{ progress4 }} Job</h4>
+            <div style="font-size: 14px; font-weight: 400; color: #9A9A9A; margin-top: -6px; padding-bottom: 10px;">Position : Personnel</div>
+            <progress-bar v-model="progress4"/>
+            <h4 style="font-weight: 300; padding-top: 10px;">Personnel E : {{ progress5 }} Job</h4>
+            <div style="font-size: 14px; font-weight: 400; color: #9A9A9A; margin-top: -6px; padding-bottom: 10px;">Position : Personnel</div>
+            <progress-bar v-model="progress5"/>
+          </section>
+        </div>
+      </div>
+    </div>
+
+      <!-- <chart-card :chart-data="pieChart.data" chart-type="Pie">
+        <template slot="header">
+          <h4 class="card-title">Email Statistics</h4>
+          <p class="card-category">Last Campaign Performance</p>
+        </template>
+        <template slot="footer">
+          <div class="legend">
+            <i class="fa fa-circle text-info"></i> To Do
+            <i class="fa fa-circle text-danger"></i> In progress
+            <i class="fa fa-circle text-warning"></i> Done
+          </div>
+          <hr>
+          <div class="stats">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalA">
+              Launch demo modal A
+            </button>
+          </div>
+        </template>
+      </chart-card> -->
 
       <!-- งานทั้งหมด : {{ count }} <br>
       To Do : {{ sumall - count }}<br>
@@ -104,7 +150,6 @@
       งานทั้งหมดที่ P'Tang Ratabhoom Boongate ทำเสร็จตามเวลา : {{ TangOnTime }}<br>
       งานทั้งหมดที่ P'Tang Ratabhoom Boongate ทำเสร็จล่าช้า : {{ TangDelay }}<br> -->
 
-    </div>
   </div>
 </template>
 <script>
@@ -113,7 +158,7 @@
   import Card from 'src/components/UIComponents/Cards/Card.vue'
   import LTable from 'src/components/UIComponents/Table.vue'
   import Checkbox from 'src/components/UIComponents/Inputs/Checkbox.vue'
-  import axios from 'axios';
+  import axios from 'axios'
 
   export default {
     components: {
@@ -143,8 +188,8 @@
         feedid: 0,
 
         PerformanceA: 0,
-        PerformanceB: 0,
-        PerformanceSum: 0,
+        PerformanceDone: 0,
+        PerformanceInProgress: 0,
         PerformanceOnTime: 0,
         PerformanceDelay: 0,
 
@@ -159,6 +204,15 @@
         TangSum: 0,
         TangOnTime: 0,
         TangDelay: 0,
+
+        progress1: 40,
+        progress2: 20,
+        progress3: 60,
+        progress4: 80,
+        progress5: 65,
+        progress6: 50,
+        progress7: 70,
+        progress8: 30,
 
         editTooltip: 'Edit Task',
         deleteTooltip: 'Remove',
@@ -234,15 +288,15 @@
     watch: {
       todocount () {
         // this.$set(this.pieChart.data.series, 'labels', ['10%', '10%', '80%'])
-        this.pieChart.data.series = [ this.todocount, this.doneprogress, this.donecount]
-        this.pieChart.data.labels = [ `${this.todocount}`, `${this.doneprogress}`, `${this.donecount}`]
+        this.pieChart.data.series = [ this.todocount, this.PerformanceInProgress, this.PerformanceDone]
+        this.pieChart.data.labels = [ `${this.todocount}`, `${this.PerformanceInProgress}`, `${this.PerformanceDone}`]
       },
       ApinanA () {
         // this.$set(this.pieChart.data.series, 'labels', ['10%', '10%', '80%'])
         this.barChart.data.series = [
           [this.PerformanceA],
-          [this.PerformanceSum],
-          [this.PerformanceB],
+          [this.PerformanceInProgress],
+          [this.PerformanceDone],
           [this.PerformanceOnTime],
           [this.PerformanceDelay]
         ]
@@ -251,7 +305,7 @@
     // Fetches posts when the component is created.
     created () {
       let that = this
-      axios.get('https://graph.facebook.com/138501810233037?fields=feed&access_token=EAACEdEose0cBALcRP1StkZCQhPMfZAtKeFjTloneONNldfDLPxhKqqIW903pDPegzVW94ZAJJ4qiuUNO5X5a3yZAu7IftGWgvvOGI6IyvoD4jGqVr00IZABX00xUNaCrXZBXZCtBaK8h5lGUrZBnZApZBLvZAMESshOGugjmMYFo50jZB7rhJT8YZBf88Siq5Wr7FvGwZD')
+      axios.get('https://graph.facebook.com/138501810233037?fields=feed&access_token=EAACEdEose0cBACi9L3PWdmdduOzZBezyipZCJMreF7s2Wld8SQc5cjjxFOX7dx8xrNy3HZAjyp6F96glZBEgQDjB74I4XhruPlxFoYv7iwD0qaqUC2z0ZBqvX5DY0pivrEXpEG4inHl0oB0w8afyZCeG1wj673lMNcFf3in3A9icKi1UHmV17gbk2HfYnIMfIZD')
       .then(response => {
         this.posts = response.data
         // console.log(this.posts.feed.data)s
@@ -287,7 +341,7 @@
           // End To Do
         })
       })
-      axios.get('https://graph.facebook.com/138501810233037?fields=feed{comments}&access_token=EAACEdEose0cBALcRP1StkZCQhPMfZAtKeFjTloneONNldfDLPxhKqqIW903pDPegzVW94ZAJJ4qiuUNO5X5a3yZAu7IftGWgvvOGI6IyvoD4jGqVr00IZABX00xUNaCrXZBXZCtBaK8h5lGUrZBnZApZBLvZAMESshOGugjmMYFo50jZB7rhJT8YZBf88Siq5Wr7FvGwZD')
+      axios.get('https://graph.facebook.com/138501810233037?fields=feed{comments}&access_token=EAACEdEose0cBACi9L3PWdmdduOzZBezyipZCJMreF7s2Wld8SQc5cjjxFOX7dx8xrNy3HZAjyp6F96glZBEgQDjB74I4XhruPlxFoYv7iwD0qaqUC2z0ZBqvX5DY0pivrEXpEG4inHl0oB0w8afyZCeG1wj673lMNcFf3in3A9icKi1UHmV17gbk2HfYnIMfIZD')
       .then(response => {
         this.comments = response.data
         // console.log(this.comments.feed.data[0].comments.data[0].from.name)
@@ -350,7 +404,7 @@
               that.PerformanceA++
             }
             if (results.status === 'ทำเสร็จแล้ว') {
-              that.PerformanceB++
+              that.PerformanceDone++
             }
             if (results.dash === 'On time') {
               that.PerformanceOnTime++
@@ -358,10 +412,11 @@
             if (results.dash === 'Delay') {
               that.PerformanceDelay++
             }
-            that.PerformanceSum = that.PerformanceA - that.PerformanceB
+            that.PerformanceInProgress = that.PerformanceA - that.PerformanceDone
 
             if (results.status === 'กำลังทำ' && results.name === 'Apinan Singbut') {
               that.ApinanA++
+              that.progress1 = that.ApinanA
             }
             if (results.status === 'ทำเสร็จแล้ว' && results.name === 'Apinan Singbut') {
               that.ApinanB++
@@ -405,5 +460,15 @@
     border-radius: 2px; /*ความโค้งมนของขอบบล๊อก*/
     box-shadow: 0 0 15px #333 ; /*เงาของบล๊อก*/
     background: #FFF; /*สีบล๊อก*/
+  }
+  .progress-bar{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    color: #fff;
+    background-color: #87CB16;
   }
 </style>

@@ -1,219 +1,112 @@
 <template>
   <div class="content">
     <div class="row">
-      <!-- To Do -->
+      <!-- Table Header -->
       <div class="col-md-12">
         <table class="table">
-          <thead class="thead-light" style="box-shadow: 0 0 15px #333;">
+          <thead class="thead-light">
             <tr>
               <th scope="col" style="padding-top:15px; padding-bottom:15px;"><center><font size="3">To Do</font></center></th>
               <th scope="col" style="padding-top:15px; padding-bottom:15px;"><center><font size="3">In Progress</font></center></th>
               <th scope="col" style="padding-top:15px; padding-bottom:15px;"><center><font size="3">Done</font></center></th>
             </tr>
           </thead>
+        </table>
+      </div>
+      <!-- End Table Header -->
+
+      <!-- To Do -->
+      <div class="col-md-4">
+        <table class="table">
           <tbody>
             <tr>
               <td>
-                <div class="alert alert-primary" role="alert">
-                  This is a primary alert—check it out!
-                </div>
-              </td>
-              <td>
-                <div class="alert alert-warning" role="alert">
-                  This is a warning alert—check it out!
-                </div>
-              </td>
-              <td>
-                <div class="alert alert-success" role="alert">
-                  This is a success alert—check it out!
+                <div v-for = "message in todo">
+                  <div v-if = "message.status == 'ยังไม่ได้ทำ'" class="alert alert-primary" role="alert">
+                    <div class="message-header">
+                      <font color="#000000" size="3">Status : </font><font color="#EEBA34" size="3"><b>Waiting</b></font>
+                    </div>
+                    <div class="message-body" style="padding-top: 10px;">
+                      <font color="#000000" size="2">&nbsp;&nbsp;&nbsp;{{ message.msg }}</font>
+                      <div style="padding-top:10px">
+                        <font color="#000000" size="2">Date : {{ tododmy }}</font>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
-
-      <div class="col-md-4">
-        <table width="100%">
-          <tr>
-            <td width="100%" height="100%">
-              <div style="background-color: #272728; padding-top:10px; padding-bottom:10px; box-shadow: 0 0 15px #333;">
-                <font color="#FFFFFF" size="4"><center>To Do</center></font>
-              </div>
-            </td>
-          </tr>
-        </table>
-        <br>
-        <div class="tbl-content">
-          <table align="center">
-            <tr>
-              <div v-for = "message in todo">
-                <!-- <div v-if = "message.status == 'ยังไม่ได้ทำ'" class="notification is-danger">
-                  &nbsp;&nbsp;&nbsp;{{ message.msg }}
-                </div> -->
-                <div v-if = "message.status == 'ยังไม่ได้ทำ'" class="card" style="width: 20rem;">
-                  <div class="message-header" style="background-color: #BFB8C0; padding-top:20px; padding-left:10px;">
-                    <p><font color="#000000" size="3">Status : </font><font color="#EEBA34" size="3"><b>Waiting</b></font></p>
-                  </div>
-                  <div class="message-body" style="padding-top:12px; padding-left:10px;">
-                    <font color="#000000" size="2">&nbsp;&nbsp;&nbsp;{{ message.msg }}</font>
-                  </div>
-                </div>
-                <!-- <article v-if = "message.status == 'ยังไม่ได้ทำ'" class="message is-danger">
-                  <div class="message-header">
-                    <p>Status : S</p>
-                    <button class="delete" aria-label="delete"></button>
-                  </div>
-                  <div class="message-body">
-                    &nbsp;&nbsp;&nbsp;{{ message.msg }}
-                  </div>
-                </article> -->
-              </div>
-            </tr>
-          </table>
-        </div>
-      </div>
       <!-- End To Do -->
 
       <!-- In Progress -->
       <div class="col-md-4">
-        <table width="100%">
-          <tr>
-            <td width="100%" height="100%">
-              <div style="background-color: #272728; padding-top:10px; padding-bottom:10px; box-shadow: 0 0 15px #333;">
-                <font color="#FFFFFF" size="4"><center>In Progress</center></font>
-              </div>
-            </td>
-          </tr>
-        </table>
-        <br>
-        <div class="tbl-content">
-          <table align="center">
+        <table class="table">
+          <tbody>
             <tr>
-              <div v-for = "progress in progress">
-                <!-- <div v-if = "progress.status == 'กำลังทำ'" class="notification is-warning">
-                  <div v-show = "progress.date == datetime">
-                    Status : <font color="green"><b>On time</b></font>
-                    Date : {{ progress.dmy }}
-                  </div>
-                  <div v-show = "progress.date != datetime">
-                    Status : <font color="red"><b>Delay</b></font>
-                    Date : {{ progress.dmy }}
-                  </div>
-                  &nbsp;&nbsp;&nbsp;{{ progress.msg }}
-                  <div>
-                    Name : {{ progress.name }}
-                  </div>
-                </div> -->
-                <div v-if = "progress.status == 'กำลังทำ'" class="card" style="width: 20rem;">
-                  <div class="message-header" style="background-color: #BFB8C0; padding-top:20px; padding-left:10px;">
-                    <p v-show = "progress.date == datetime">
-                      <font color="#000000" size="3">Status : </font><font color="green"><b>On time</b></font>
-                      <font color="#000000" size="3">Date : {{ progress.dmy }}</font>
-                    </p>
-                    <p v-show = "progress.date != datetime">
-                      <font color="#000000" size="3">Status : </font><font color="red"><b>Delay</b></font>
-                      <font color="#000000" size="3">Date : {{ progress.dmy }}</font>
-                    </p>
-                  </div>
-                  <div class="message-body" style="padding-top:12px; padding-left:10px;">
-                    <font color="#000000" size="2">&nbsp;&nbsp;&nbsp;{{ progress.msg }}</font>
-                    <div style="padding-top:10px">
-                      <font color="#000000" size="2">Name : {{ progress.name }}</font>
+              <td>
+                <div v-for = "progress in progress">
+                  <div v-if = "progress.status == 'กำลังทำ'" class="alert alert-warning" role="alert">
+                    <div class="message-header">
+                      <div v-show = "progress.date == datetime">
+                        <font color="#000000" size="3">Status : </font><font color="green"><b>On time</b></font>
+                      </div>
+                      <div v-show = "progress.date != datetime">
+                        <font color="#000000" size="3">Status : </font><font color="red"><b>Delay</b></font>
+                      </div>
+                    </div>
+                    <div class="message-body" style="padding-top: 10px;">
+                      <font color="#000000" size="2">&nbsp;&nbsp;&nbsp;{{ progress.msg }}</font>
+                      <div style="padding-top:10px">
+                        <div v-show = "progress.date == datetime">
+                          <font color="#000000" size="2">Date Start: {{ progress.dmy }}</font>
+                        </div>
+                        <div v-show = "progress.date != datetime">
+                          <font color="#000000" size="2">Date Start: {{ progress.dmy }}</font>
+                        </div>
+                        <font color="#000000" size="2">Name : {{ progress.name }}</font><br>
+                        <font color="#000000" size="2">Position : Personnel</font>
+                      </div>
                     </div>
                   </div>
                 </div>
-
-                <!-- <article v-if = "progress.status == 'กำลังทำ'" class="message is-warning">
-                  <div class="message-header">
-                    <p v-show = "progress.date == datetime">
-                      Status : <font color="green"><b>On time</b></font>
-                      Date : {{ progress.dmy }}
-                    </p>
-                    <p v-show = "progress.date != datetime">
-                      Status : <font color="red"><b>Delay</b></font>
-                      Date : {{ progress.dmy }}
-                    </p>
-                    <button class="delete" aria-label="delete"></button>
-                  </div>
-                  <div class="message-body">
-                    &nbsp;&nbsp;&nbsp;{{ progress.msg }}
-                    <div>
-                      Name : {{ progress.name }}
-                    </div>
-                  </div>
-                </article> -->
-              </div>
+              </td>
             </tr>
-          </table>
-        </div>
+          </tbody>
+        </table>
       </div>
       <!-- End In Progress -->
 
       <!-- Done -->
       <div class="col-md-4">
-        <table width="100%">
-          <tr>
-            <td width="100%" height="100%">
-              <div style="background-color: #272728; padding-top:10px; padding-bottom:10px; box-shadow: 0 0 15px #333;">
-                <font color="#FFFFFF" size="4"><center>Done</center></font>
-              </div>
-            </td>
-          </tr>
-        </table>
-        <br>
-        <div class="tbl-content">
-          <table align="center">
+        <table class="table">
+          <tbody>
             <tr>
-              <div v-for = "dodone in done">
-                <!-- <div v-if = "dodone.status == 'ทำเสร็จแล้ว'" class="notification is-success">
-                  <div>
-                    Status : <font color="green"><b>{{ dodone.dash }}</b></font>
-                  </div> -->
-                  <!-- <div v-show = "progress.date == progress.ondelay">
-                    Status : <font color="green"><b>On time</b></font>
-                  </div>
-                  <div v-show = "progress.date != progress.ondelay">
-                    Status : <font color="green"><b>Delay</b></font>
-                  </div> -->
-                  <!-- &nbsp;&nbsp;&nbsp;{{ dodone.msg }}
-                  <div>
-                    Name : {{ dodone.name }}
-                  </div>
-                </div> -->
-                <div v-if = "dodone.status == 'ทำเสร็จแล้ว'" class="card" style="width: 20rem;">
-                  <div class="message-header" style="background-color: #BFB8C0; padding-top:20px; padding-left:10px;">
-                    <div v-if = "dodone.dash == 'On time'">
-                      <p><font color="#000000" size="3">Status : </font><font color="green"><b>{{ dodone.dash }}</b></font></p>
+              <td>
+                <div v-for = "dodone in done">
+                  <div v-if = "dodone.status == 'ทำเสร็จแล้ว'" class="alert alert-success" role="alert">
+                    <div class="message-header">
+                      <div v-if = "dodone.dash == 'On time'">
+                        <font color="#000000" size="3">Status : </font><font color="green"><b>{{ dodone.dash }}</b></font>
+                      </div>
+                      <div v-if = "dodone.dash == 'Delay'">
+                        <font color="#000000" size="3">Status : </font><font color="red"><b>{{ dodone.dash }}</b></font>
+                      </div>
                     </div>
-                    <div v-if = "dodone.dash == 'Delay'">
-                      <p><font color="#000000" size="3">Status : </font><font color="red"><b>{{ dodone.dash }}</b></font></p>
-                    </div>
-                  </div>
-                  <div class="message-body" style="padding-top:12px; padding-left:10px;">
-                    <font color="#000000" size="2">&nbsp;&nbsp;&nbsp;{{ dodone.msg }}</font>
-                    <div style="padding-top:10px">
-                      <font color="#000000" size="2">Name : {{ dodone.name }}</font>
+                    <div class="message-body" style="padding-top: 10px;">
+                      <font color="#000000" size="2">&nbsp;&nbsp;&nbsp;{{ dodone.msg }}</font>
+                      <div style="padding-top:10px">
+                        <font color="#000000" size="2">Name : {{ dodone.name }}</font>
+                      </div>
                     </div>
                   </div>
                 </div>
-
-                <!-- <article v-if = "dodone.status == 'ทำเสร็จแล้ว'" class="message is-success">
-                  <div class="message-header">
-                    <p>Status : <font color="green"><b>{{ dodone.dash }}</b></font></p>
-                    <button class="delete" aria-label="delete"></button>
-                  </div>
-                  <div class="message-body">
-                    &nbsp;&nbsp;&nbsp;{{ dodone.msg }}
-                    <div style="padding-top:10px">
-                      Name : {{ dodone.name }}
-                    </div>
-                  </div>
-                </article> -->
-              </div>
+              </td>
             </tr>
-          </table>
-        </div>
+          </tbody>
+        </table>
       </div>
       <!-- End Done -->
     </div>
@@ -281,7 +174,7 @@ export default {
   // Fetches posts when the component is created.
   created () {
     let that = this
-    axios.get('https://graph.facebook.com/138501810233037?fields=feed&access_token=EAACEdEose0cBALcRP1StkZCQhPMfZAtKeFjTloneONNldfDLPxhKqqIW903pDPegzVW94ZAJJ4qiuUNO5X5a3yZAu7IftGWgvvOGI6IyvoD4jGqVr00IZABX00xUNaCrXZBXZCtBaK8h5lGUrZBnZApZBLvZAMESshOGugjmMYFo50jZB7rhJT8YZBf88Siq5Wr7FvGwZD')
+    axios.get('https://graph.facebook.com/138501810233037?fields=feed&access_token=EAACEdEose0cBACi9L3PWdmdduOzZBezyipZCJMreF7s2Wld8SQc5cjjxFOX7dx8xrNy3HZAjyp6F96glZBEgQDjB74I4XhruPlxFoYv7iwD0qaqUC2z0ZBqvX5DY0pivrEXpEG4inHl0oB0w8afyZCeG1wj673lMNcFf3in3A9icKi1UHmV17gbk2HfYnIMfIZD')
     .then(response => {
       this.posts = response.data
       // console.log(this.posts.feed.data)s
@@ -297,14 +190,16 @@ export default {
             date: '',
             dmy: '',
             ondelay: '',
-            dash: ''
+            dash: '',
+            tododmy: ''
           }
           // console.log(comment.id)
           that.todo.push(newmessage)
           that.progress.push(newmessage)
           that.done.push(newmessage)
           that.count++
-          // console.log(that.test.id)
+          that.tododmy = message.updated_time.substr(0, 10)
+          console.log(that.tododmy)
           // that.todo.push(message.message.substr(6))
           // that.todo.push(message.id)
           // that.feedid = message.id
@@ -312,7 +207,7 @@ export default {
         }
       })
     })
-    axios.get('https://graph.facebook.com/138501810233037?fields=feed{comments}&access_token=EAACEdEose0cBALcRP1StkZCQhPMfZAtKeFjTloneONNldfDLPxhKqqIW903pDPegzVW94ZAJJ4qiuUNO5X5a3yZAu7IftGWgvvOGI6IyvoD4jGqVr00IZABX00xUNaCrXZBXZCtBaK8h5lGUrZBnZApZBLvZAMESshOGugjmMYFo50jZB7rhJT8YZBf88Siq5Wr7FvGwZD')
+    axios.get('https://graph.facebook.com/138501810233037?fields=feed{comments}&access_token=EAACEdEose0cBACi9L3PWdmdduOzZBezyipZCJMreF7s2Wld8SQc5cjjxFOX7dx8xrNy3HZAjyp6F96glZBEgQDjB74I4XhruPlxFoYv7iwD0qaqUC2z0ZBqvX5DY0pivrEXpEG4inHl0oB0w8afyZCeG1wj673lMNcFf3in3A9icKi1UHmV17gbk2HfYnIMfIZD')
     .then(response => {
       this.comments = response.data
       // console.log(this.comments.feed.data[0].comments.data[0].from.name)

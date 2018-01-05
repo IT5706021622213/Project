@@ -7,6 +7,11 @@ import LightBootstrap from './light-bootstrap-main'
 
 // router setup
 import routes from './routes/routes'
+
+import 'bootstrap/dist/css/bootstrap.min.css'
+import * as uiv from 'uiv'
+Vue.use(uiv)
+
 // plugin setup
 Vue.use(VueRouter)
 Vue.use(LightBootstrap)
