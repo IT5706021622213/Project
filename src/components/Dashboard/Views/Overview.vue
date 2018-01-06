@@ -85,10 +85,10 @@
           <p style="font-size: 14px; font-weight: 400; color: #9A9A9A; margin-top: -6px;">All products including Taxes</p>
           <section>
             <h4 style="font-weight: 300;">Apinan Singbut : {{ progress1 }} Job</h4>
-            <div style="font-size: 14px; font-weight: 400; color: #9A9A9A; margin-top: -6px; padding-bottom: 10px;">Position : Personnel</div>
+            <div style="font-size: 14px; font-weight: 400; color: #9A9A9A; margin-top: -6px; padding-bottom: 10px;">Position : Programmer</div>
             <progress-bar v-model="progress1"/>
-            <h4 style="font-weight: 300; padding-top: 10px;">Personnel B : {{ progress2 }} Job</h4>
-            <div style="font-size: 14px; font-weight: 400; color: #9A9A9A; margin-top: -6px; padding-bottom: 10px;">Position : Personnel</div>
+            <h4 style="font-weight: 300; padding-top: 10px;">Nitigan Nakjuatong : {{ progress2 }} Job</h4>
+            <div style="font-size: 14px; font-weight: 400; color: #9A9A9A; margin-top: -6px; padding-bottom: 10px;">Position : Testing</div>
             <progress-bar v-model="progress2"/>
             <h4 style="font-weight: 300; padding-top: 10px;">Personnel C : {{ progress3 }} Job</h4>
             <div style="font-size: 14px; font-weight: 400; color: #9A9A9A; margin-top: -6px; padding-bottom: 10px;">Position : Personnel</div>
@@ -199,11 +199,11 @@
         ApinanOnTime: 0,
         ApinanDelay: 0,
 
-        TangA: 0,
-        TangB: 0,
-        TangSum: 0,
-        TangOnTime: 0,
-        TangDelay: 0,
+        NitiganA: 0,
+        NitiganB: 0,
+        NitiganSum: 0,
+        NitiganOnTime: 0,
+        NitiganDelay: 0,
 
         progress1: 40,
         progress2: 20,
@@ -305,7 +305,7 @@
     // Fetches posts when the component is created.
     created () {
       let that = this
-      axios.get('https://graph.facebook.com/138501810233037?fields=feed&access_token=EAACEdEose0cBACi9L3PWdmdduOzZBezyipZCJMreF7s2Wld8SQc5cjjxFOX7dx8xrNy3HZAjyp6F96glZBEgQDjB74I4XhruPlxFoYv7iwD0qaqUC2z0ZBqvX5DY0pivrEXpEG4inHl0oB0w8afyZCeG1wj673lMNcFf3in3A9icKi1UHmV17gbk2HfYnIMfIZD')
+      axios.get('https://graph.facebook.com/138501810233037?fields=feed&access_token=EAACEdEose0cBAPQWdGbOKWC5Qzr4zpdQiQYoUMxYiqNxiSjou2ZAG6jqLlqY7LPUZB2rszlHSdJMDZCCpDT9JwQZBMh8odU6xq3NQhoYP2X88YnYxwb2mnWGk6htEEMOD0jqNQEWPjY1Oh7C9wr4fWkgGIlmS8ljCZBIqBENEEsD5Q23C85ZCVLjZCnCliowVEZD')
       .then(response => {
         this.posts = response.data
         // console.log(this.posts.feed.data)s
@@ -341,7 +341,7 @@
           // End To Do
         })
       })
-      axios.get('https://graph.facebook.com/138501810233037?fields=feed{comments}&access_token=EAACEdEose0cBACi9L3PWdmdduOzZBezyipZCJMreF7s2Wld8SQc5cjjxFOX7dx8xrNy3HZAjyp6F96glZBEgQDjB74I4XhruPlxFoYv7iwD0qaqUC2z0ZBqvX5DY0pivrEXpEG4inHl0oB0w8afyZCeG1wj673lMNcFf3in3A9icKi1UHmV17gbk2HfYnIMfIZD')
+      axios.get('https://graph.facebook.com/138501810233037?fields=feed{comments}&access_token=EAACEdEose0cBAPQWdGbOKWC5Qzr4zpdQiQYoUMxYiqNxiSjou2ZAG6jqLlqY7LPUZB2rszlHSdJMDZCCpDT9JwQZBMh8odU6xq3NQhoYP2X88YnYxwb2mnWGk6htEEMOD0jqNQEWPjY1Oh7C9wr4fWkgGIlmS8ljCZBIqBENEEsD5Q23C85ZCVLjZCnCliowVEZD')
       .then(response => {
         this.comments = response.data
         // console.log(this.comments.feed.data[0].comments.data[0].from.name)
@@ -429,19 +429,20 @@
             }
             that.ApinanSum = that.ApinanA - that.ApinanB
 
-            if (results.status === 'กำลังทำ' && results.name === "P'Tang Ratabhoom Boongate") {
-              that.TangA++
+            if (results.status === 'กำลังทำ' && results.name === "Nitigan Nakjuatong") {
+              that.NitiganA++
+              that.progress2 = that.NitiganA
             }
-            if (results.status === 'ทำเสร็จแล้ว' && results.name === "P'Tang Ratabhoom Boongate") {
-              that.TangB++
+            if (results.status === 'ทำเสร็จแล้ว' && results.name === "Nitigan Nakjuatong") {
+              that.NitiganB++
             }
-            if (results.dash === 'On time' && results.name === "P'Tang Ratabhoom Boongate") {
-              that.TangOnTime++
+            if (results.dash === 'On time' && results.name === "Nitigan Nakjuatong") {
+              that.NitiganOnTime++
             }
-            if (results.dash === 'Delay' && results.name === "P'Tang Ratabhoom Boongate") {
-              that.TangDelay++
+            if (results.dash === 'Delay' && results.name === "Nitigan Nakjuatong") {
+              that.NitiganDelay++
             }
-            that.TangSum = that.TangA - that.TangB
+            that.NitiganSum = that.NitiganA - that.NitiganB
           })
           // console.log(that.progress)
         })

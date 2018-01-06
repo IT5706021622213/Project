@@ -29,7 +29,8 @@
                     <div class="message-body" style="padding-top: 10px;">
                       <font color="#000000" size="2">&nbsp;&nbsp;&nbsp;{{ message.msg }}</font>
                       <div style="padding-top:10px">
-                        <font color="#000000" size="2">Date : {{ tododmy }}</font>
+                        <font color="#000000" size="2">Date : {{ tododmy }}</font><br>
+                        <font color="#000000" size="2">Time : {{ todotime }}</font>
                       </div>
                     </div>
                   </div>
@@ -48,12 +49,14 @@
             <tr>
               <td>
                 <div v-for = "progress in progress">
+                  <div class="">
+                  </div>
                   <div v-if = "progress.status == 'กำลังทำ'" class="alert alert-warning" role="alert">
                     <div class="message-header">
-                      <div v-show = "progress.date == datetime">
+                      <div v-show = "progress.dateendday >= datetime">
                         <font color="#000000" size="3">Status : </font><font color="green"><b>On time</b></font>
                       </div>
-                      <div v-show = "progress.date != datetime">
+                      <div v-show = "progress.dateendday < datetime">
                         <font color="#000000" size="3">Status : </font><font color="red"><b>Delay</b></font>
                       </div>
                     </div>
@@ -61,13 +64,23 @@
                       <font color="#000000" size="2">&nbsp;&nbsp;&nbsp;{{ progress.msg }}</font>
                       <div style="padding-top:10px">
                         <div v-show = "progress.date == datetime">
-                          <font color="#000000" size="2">Date Start: {{ progress.dmy }}</font>
+                          <font color="#000000" size="2">Job Start : {{ progress.dmy }}</font><br>
+                          <font color="#000000" size="2">Deadline : {{ progress.dateend }}</font>
                         </div>
                         <div v-show = "progress.date != datetime">
-                          <font color="#000000" size="2">Date Start: {{ progress.dmy }}</font>
+                          <font color="#000000" size="2">Job Start : {{ progress.dmy }}</font><br>
+                          <font color="#000000" size="2">Deadline : {{ progress.dateend }}</font>
                         </div>
-                        <font color="#000000" size="2">Name : {{ progress.name }}</font><br>
-                        <font color="#000000" size="2">Position : Personnel</font>
+                        <font color="#000000" size="2">{{ progress.name }}</font><br>
+                        <div v-if = "progress.name == 'Apinan Singbut'">
+                          <font color="#000000" size="2">Position : Programmer</font>
+                        </div>
+                        <div v-if = "progress.name == 'Nitigan Nakjuatong'">
+                          <font color="#000000" size="2">Position : Testing</font>
+                        </div>
+                        <div v-if = "progress.name != 'Apinan Singbut' && progress.name != 'Nitigan Nakjuatong'">
+                          <font color="#000000" size="2">Position : UI / UX</font>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -88,17 +101,28 @@
                 <div v-for = "dodone in done">
                   <div v-if = "dodone.status == 'ทำเสร็จแล้ว'" class="alert alert-success" role="alert">
                     <div class="message-header">
-                      <div v-if = "dodone.dash == 'On time'">
-                        <font color="#000000" size="3">Status : </font><font color="green"><b>{{ dodone.dash }}</b></font>
+                      <div v-if = "dodone.dateendday >= dodone.ondelayday">
+                        <font color="#000000" size="3">Status : </font><font color="green"><b>On time</b></font>
                       </div>
-                      <div v-if = "dodone.dash == 'Delay'">
-                        <font color="#000000" size="3">Status : </font><font color="red"><b>{{ dodone.dash }}</b></font>
+                      <div v-if = "dodone.dateendday < dodone.ondelayday">
+                        <font color="#000000" size="3">Status : </font><font color="red"><b>Delay</b></font>
                       </div>
                     </div>
                     <div class="message-body" style="padding-top: 10px;">
                       <font color="#000000" size="2">&nbsp;&nbsp;&nbsp;{{ dodone.msg }}</font>
+                      <br><br>
+                      <div v-show = "dodone.date == datetime">
+                        <font color="#000000" size="2">Job Start : {{ dodone.dmy }}</font><br>
+                        <font color="#000000" size="2">Deadline : {{ dodone.dateend }}</font><br>
+                        <font color="#000000" size="2">Job End : {{ dodone.ondelay }}</font>
+                      </div>
+                      <div v-show = "dodone.date != datetime">
+                        <font color="#000000" size="2">Job Start : {{ dodone.dmy }}</font><br>
+                        <font color="#000000" size="2">Deadline : {{ dodone.dateend }}</font><br>
+                        <font color="#000000" size="2">Job End : {{ dodone.ondelay }}</font>
+                      </div>
                       <div style="padding-top:10px">
-                        <font color="#000000" size="2">Name : {{ dodone.name }}</font>
+                        <font color="#000000" size="2">{{ dodone.name }}</font>
                       </div>
                     </div>
                   </div>
@@ -138,7 +162,8 @@ export default {
       progresscount: 0,
       sumprogress: 0,
       donecount: 0,
-      feedid: 0
+      feedid: 0,
+      number: 0
     }
   },
   computed: {
@@ -163,6 +188,9 @@ export default {
   mounted () {
     let that = this
     that.datetime = Date().substr(8, 2)
+    if (that.datetime === '06') {
+      that.datetime = 6
+    }
     setInterval(() => {
       // https://github.com/vuejs/vue/issues/2873
       // Array.prototype.$set/$remove deprecated (use Vue.set or Array.prototype.splice instead)
@@ -174,7 +202,7 @@ export default {
   // Fetches posts when the component is created.
   created () {
     let that = this
-    axios.get('https://graph.facebook.com/138501810233037?fields=feed&access_token=EAACEdEose0cBACi9L3PWdmdduOzZBezyipZCJMreF7s2Wld8SQc5cjjxFOX7dx8xrNy3HZAjyp6F96glZBEgQDjB74I4XhruPlxFoYv7iwD0qaqUC2z0ZBqvX5DY0pivrEXpEG4inHl0oB0w8afyZCeG1wj673lMNcFf3in3A9icKi1UHmV17gbk2HfYnIMfIZD')
+    axios.get('https://graph.facebook.com/138501810233037?fields=feed&access_token=EAACEdEose0cBAPQWdGbOKWC5Qzr4zpdQiQYoUMxYiqNxiSjou2ZAG6jqLlqY7LPUZB2rszlHSdJMDZCCpDT9JwQZBMh8odU6xq3NQhoYP2X88YnYxwb2mnWGk6htEEMOD0jqNQEWPjY1Oh7C9wr4fWkgGIlmS8ljCZBIqBENEEsD5Q23C85ZCVLjZCnCliowVEZD')
     .then(response => {
       this.posts = response.data
       // console.log(this.posts.feed.data)s
@@ -190,8 +218,14 @@ export default {
             date: '',
             dmy: '',
             ondelay: '',
+            ondelayday: '',
             dash: '',
-            tododmy: ''
+            tododmy: '',
+            todotime: '',
+            day: '',
+            my: '',
+            dateend: '',
+            dateendday: ''
           }
           // console.log(comment.id)
           that.todo.push(newmessage)
@@ -199,7 +233,8 @@ export default {
           that.done.push(newmessage)
           that.count++
           that.tododmy = message.updated_time.substr(0, 10)
-          console.log(that.tododmy)
+          that.todotime = message.updated_time.substr(11, 5)
+          // console.log(that.todo)
           // that.todo.push(message.message.substr(6))
           // that.todo.push(message.id)
           // that.feedid = message.id
@@ -207,7 +242,7 @@ export default {
         }
       })
     })
-    axios.get('https://graph.facebook.com/138501810233037?fields=feed{comments}&access_token=EAACEdEose0cBACi9L3PWdmdduOzZBezyipZCJMreF7s2Wld8SQc5cjjxFOX7dx8xrNy3HZAjyp6F96glZBEgQDjB74I4XhruPlxFoYv7iwD0qaqUC2z0ZBqvX5DY0pivrEXpEG4inHl0oB0w8afyZCeG1wj673lMNcFf3in3A9icKi1UHmV17gbk2HfYnIMfIZD')
+    axios.get('https://graph.facebook.com/138501810233037?fields=feed{comments}&access_token=EAACEdEose0cBAPQWdGbOKWC5Qzr4zpdQiQYoUMxYiqNxiSjou2ZAG6jqLlqY7LPUZB2rszlHSdJMDZCCpDT9JwQZBMh8odU6xq3NQhoYP2X88YnYxwb2mnWGk6htEEMOD0jqNQEWPjY1Oh7C9wr4fWkgGIlmS8ljCZBIqBENEEsD5Q23C85ZCVLjZCnCliowVEZD')
     .then(response => {
       this.comments = response.data
       // console.log(this.comments.feed.data[0].comments.data[0].from.name)
@@ -222,32 +257,58 @@ export default {
           // console.log(progress.from.name);ssssssssss
 
           // comment start
-          if (progress.message === '#start') {
-            let result = that.todo.find(item => item.id === comment.id)
+          let result = that.todo.find(item => item.id === comment.id)
+          // console.log(result)
+          if (progress.message === '#start' && result.status === 'ยังไม่ได้ทำ') {
+            // let result = that.todo.find(item => item.id === comment.id)
             result.status = 'กำลังทำ'
             result.date = progress.created_time.substr(8, 2)
             result.dmy = progress.created_time.substr(0, 10)
-            result.name = progress.from.name
+            // if (progress.message.substr(0, 5) === '#name') {
+            //   result.name = result.name + progress.message.substr(6, 20)
+            // }
             that.progresscount++
+            that.number = progress.created_time.substr(9, 1)
             that.sumprogress = that.progresscount - that.donecount
             that.todo.push(result)
-            // console.log(that.todo)
             // console.log(that.datetime)
             // console.log(that.test.id)
           }
-          // End comment start
-          if (progress.message === '#end') {
-            let result = that.todo.find(item => item.id === comment.id)
-            result.status = 'ทำเสร็จแล้ว'
-            result.ondelay = progress.created_time.substr(8, 2)
-            if (result.date === result.ondelay) {
-              result.dash = 'On time'
+          if (progress.message.substr(0, 5) === '#name') {
+            if (progress.message.substr(6, 20) === '') {
+              result.name = result.name + ''
+            }
+            else result.name = result.name + 'Name : ' + progress.message.substr(6, 20)
+          }
+          // console.log(progress.message)
+          if (progress.message.substr(0, 5) === '#date') {
+            if (progress.message.substr(6, 20) === '') {
+              result.dateend = ''
             }
             else {
-              result.dash = 'Delay'
+              result.dateend = progress.message.substr(6, 10)
+              result.dateendday = progress.message.substr(14, 2)
+              if (result.dateendday === '10') {
+                result.dateendday = 10
+              }
+              console.log(result.dateendday)
+              that.dateend = result.dateend
             }
+          }
+          // End comment start
+          if (progress.message === '#end' && result.status === 'กำลังทำ') {
+            // let result = that.todo.find(item => item.id === comment.id)
+            result.status = 'ทำเสร็จแล้ว'
+            result.ondelay = progress.created_time.substr(0, 10)
+            result.ondelayday = progress.created_time.substr(8, 2)
+            if (result.ondelayday === '06') {
+              result.ondelayday = 6
+            }
+            // console.log(that.dateend)
+            console.log(result.dmy);
             that.donecount++
             that.todo.push(result)
+
             // console.log(that.todo)s
             // console.log(that.test.id)sssหsss
           }
