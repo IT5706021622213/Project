@@ -180,11 +180,12 @@
         done: [],
         datetime: '',
         testy: 'hello',
+
         count: 0,
         todocount: 0,
         progresscount: 0,
-        doneprogress: 0,
         donecount: 0,
+
         feedid: 0,
 
         PerformanceA: 0,
@@ -193,26 +194,11 @@
         PerformanceOnTime: 0,
         PerformanceDelay: 0,
 
-        ApinanA: 0,
-        ApinanB: 0,
-        ApinanSum: 0,
-        ApinanOnTime: 0,
-        ApinanDelay: 0,
-
-        NitiganA: 0,
-        NitiganB: 0,
-        NitiganSum: 0,
-        NitiganOnTime: 0,
-        NitiganDelay: 0,
-
         progress1: 40,
         progress2: 20,
         progress3: 60,
         progress4: 80,
         progress5: 65,
-        progress6: 50,
-        progress7: 70,
-        progress8: 30,
 
         editTooltip: 'Edit Task',
         deleteTooltip: 'Remove',
@@ -305,7 +291,7 @@
     // Fetches posts when the component is created.
     created () {
       let that = this
-      axios.get('https://graph.facebook.com/138501810233037?fields=feed&access_token=EAACEdEose0cBAPQWdGbOKWC5Qzr4zpdQiQYoUMxYiqNxiSjou2ZAG6jqLlqY7LPUZB2rszlHSdJMDZCCpDT9JwQZBMh8odU6xq3NQhoYP2X88YnYxwb2mnWGk6htEEMOD0jqNQEWPjY1Oh7C9wr4fWkgGIlmS8ljCZBIqBENEEsD5Q23C85ZCVLjZCnCliowVEZD')
+      axios.get('https://graph.facebook.com/138501810233037?fields=feed&access_token=EAACEdEose0cBAA5UF6U8bJHkyjJO87zj2MFMYeDgxZCuycRUZBggZAcuFWo5Op3t6nTu7LC1pUw3qQqxCUoklvyhPJKOBzW1NTvBmmA5ZBKikBFBKLZAgP3xCubKAYVQK3XBoTTKk98UZA0iwCcOPiZBYgkG9nS7MxXI1OV06xcuMOWjqcrXXYsOm53FmT7ZC7sZD')
       .then(response => {
         this.posts = response.data
         // console.log(this.posts.feed.data)s
@@ -341,7 +327,7 @@
           // End To Do
         })
       })
-      axios.get('https://graph.facebook.com/138501810233037?fields=feed{comments}&access_token=EAACEdEose0cBAPQWdGbOKWC5Qzr4zpdQiQYoUMxYiqNxiSjou2ZAG6jqLlqY7LPUZB2rszlHSdJMDZCCpDT9JwQZBMh8odU6xq3NQhoYP2X88YnYxwb2mnWGk6htEEMOD0jqNQEWPjY1Oh7C9wr4fWkgGIlmS8ljCZBIqBENEEsD5Q23C85ZCVLjZCnCliowVEZD')
+      axios.get('https://graph.facebook.com/138501810233037?fields=feed{comments}&access_token=EAACEdEose0cBAA5UF6U8bJHkyjJO87zj2MFMYeDgxZCuycRUZBggZAcuFWo5Op3t6nTu7LC1pUw3qQqxCUoklvyhPJKOBzW1NTvBmmA5ZBKikBFBKLZAgP3xCubKAYVQK3XBoTTKk98UZA0iwCcOPiZBYgkG9nS7MxXI1OV06xcuMOWjqcrXXYsOm53FmT7ZC7sZD')
       .then(response => {
         this.comments = response.data
         // console.log(this.comments.feed.data[0].comments.data[0].from.name)
@@ -357,22 +343,35 @@
             // comment start
 
             // In Progress
-            if (progress.message === '#start') {
-              let result = that.todo.find(item => item.id === comment.id)
+            // if (progress.message === '#start') {
+            //   let result = that.todo.find(item => item.id === comment.id)
+            //   result.status = 'กำลังทำ'
+            //   result.date = progress.created_time.substr(8, 2)
+            //   result.dmy = progress.created_time.substr(0, 10)
+            //   result.name = progress.from.name
+            //   that.progresscount++
+            //   console.log(that.progresscount);
+            //   // doneprogress : In Progress
+            //   that.todocount = that.count - that.progresscount
+            //   // todocount : To Do
+            //   that.todo.push(result)
+            //
+            //   // console.log(that.todocount)
+            //   // console.log('scrum')
+            //   // console.log(that.test.id)
+            // }
+            if (progress.message === '#start' && result.status === 'ยังไม่ได้ทำ') {
+              // let result = that.todo.find(item => item.id === comment.id)
               result.status = 'กำลังทำ'
               result.date = progress.created_time.substr(8, 2)
               result.dmy = progress.created_time.substr(0, 10)
-              result.name = progress.from.name
+              // if (progress.message.substr(0, 5) === '#name') {
+              //   result.name = result.name + progress.message.substr(6, 20)
+              // }
               that.progresscount++
-              that.sumall = that.doneprogress + that.donecount
-              that.doneprogress = that.progresscount - that.donecount
-              // doneprogress : In Progress
-              that.todocount = that.count - that.progresscount
-              // todocount : To Do
+              that.number = progress.created_time.substr(9, 1)
               that.todo.push(result)
-
-              console.log(that.todocount)
-              console.log('scrum')
+              // console.log(that.datetime)
               // console.log(that.test.id)
             }
             // End In progress
@@ -414,35 +413,7 @@
             }
             that.PerformanceInProgress = that.PerformanceA - that.PerformanceDone
 
-            if (results.status === 'กำลังทำ' && results.name === 'Apinan Singbut') {
-              that.ApinanA++
-              that.progress1 = that.ApinanA
-            }
-            if (results.status === 'ทำเสร็จแล้ว' && results.name === 'Apinan Singbut') {
-              that.ApinanB++
-            }
-            if (results.dash === 'On time' && results.name === 'Apinan Singbut') {
-              that.ApinanOnTime++
-            }
-            if (results.dash === 'Delay' && results.name === 'Apinan Singbut') {
-              that.ApinanDelay++
-            }
-            that.ApinanSum = that.ApinanA - that.ApinanB
-
-            if (results.status === 'กำลังทำ' && results.name === "Nitigan Nakjuatong") {
-              that.NitiganA++
-              that.progress2 = that.NitiganA
-            }
-            if (results.status === 'ทำเสร็จแล้ว' && results.name === "Nitigan Nakjuatong") {
-              that.NitiganB++
-            }
-            if (results.dash === 'On time' && results.name === "Nitigan Nakjuatong") {
-              that.NitiganOnTime++
-            }
-            if (results.dash === 'Delay' && results.name === "Nitigan Nakjuatong") {
-              that.NitiganDelay++
-            }
-            that.NitiganSum = that.NitiganA - that.NitiganB
+            // -------------------------------------------------------
           })
           // console.log(that.progress)
         })

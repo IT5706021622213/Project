@@ -188,8 +188,98 @@ export default {
   mounted () {
     let that = this
     that.datetime = Date().substr(8, 2)
+    if (that.datetime === '01') {
+      that.datetime = 1
+    }
+    if (that.datetime === '02') {
+      that.datetime = 2
+    }
+    if (that.datetime === '03') {
+      that.datetime = 3
+    }
+    if (that.datetime === '04') {
+      that.datetime = 4
+    }
+    if (that.datetime === '05') {
+      that.datetime = 5
+    }
     if (that.datetime === '06') {
       that.datetime = 6
+    }
+    if (that.datetime === '07') {
+      that.datetime = 7
+    }
+    if (that.datetime === '08') {
+      that.datetime = 8
+    }
+    if (that.datetime === '09') {
+      that.datetime = 9
+    }
+    if (that.datetime === '10') {
+      that.datetime = 10
+    }
+    if (that.datetime === '11') {
+      that.datetime = 11
+    }
+    if (that.datetime === '12') {
+      that.datetime = 12
+    }
+    if (that.datetime === '13') {
+      that.datetime = 13
+    }
+    if (that.datetime === '14') {
+      that.datetime = 14
+    }
+    if (that.datetime === '15') {
+      that.datetime = 15
+    }
+    if (that.datetime === '16') {
+      that.datetime = 16
+    }
+    if (that.datetime === '17') {
+      that.datetime = 17
+    }
+    if (that.datetime === '18') {
+      that.datetime = 18
+    }
+    if (that.datetime === '19') {
+      that.datetime = 19
+    }
+    if (that.datetime === '20') {
+      that.datetime = 20
+    }
+    if (that.datetime === '21') {
+      that.datetime = 21
+    }
+    if (that.datetime === '22') {
+      that.datetime = 22
+    }
+    if (that.datetime === '23') {
+      that.datetime = 23
+    }
+    if (that.datetime === '24') {
+      that.datetime = 24
+    }
+    if (that.datetime === '25') {
+      that.datetime = 25
+    }
+    if (that.datetime === '26') {
+      that.datetime = 26
+    }
+    if (that.datetime === '27') {
+      that.datetime = 27
+    }
+    if (that.datetime === '28') {
+      that.datetime = 28
+    }
+    if (that.datetime === '29') {
+      that.datetime = 29
+    }
+    if (that.datetime === '30') {
+      that.datetime = 30
+    }
+    if (that.datetime === '31') {
+      that.datetime = 31
     }
     setInterval(() => {
       // https://github.com/vuejs/vue/issues/2873
@@ -202,7 +292,7 @@ export default {
   // Fetches posts when the component is created.
   created () {
     let that = this
-    axios.get('https://graph.facebook.com/138501810233037?fields=feed&access_token=EAACEdEose0cBAPQWdGbOKWC5Qzr4zpdQiQYoUMxYiqNxiSjou2ZAG6jqLlqY7LPUZB2rszlHSdJMDZCCpDT9JwQZBMh8odU6xq3NQhoYP2X88YnYxwb2mnWGk6htEEMOD0jqNQEWPjY1Oh7C9wr4fWkgGIlmS8ljCZBIqBENEEsD5Q23C85ZCVLjZCnCliowVEZD')
+    axios.get('https://graph.facebook.com/138501810233037?fields=feed&access_token=EAACEdEose0cBAA5UF6U8bJHkyjJO87zj2MFMYeDgxZCuycRUZBggZAcuFWo5Op3t6nTu7LC1pUw3qQqxCUoklvyhPJKOBzW1NTvBmmA5ZBKikBFBKLZAgP3xCubKAYVQK3XBoTTKk98UZA0iwCcOPiZBYgkG9nS7MxXI1OV06xcuMOWjqcrXXYsOm53FmT7ZC7sZD')
     .then(response => {
       this.posts = response.data
       // console.log(this.posts.feed.data)s
@@ -242,7 +332,7 @@ export default {
         }
       })
     })
-    axios.get('https://graph.facebook.com/138501810233037?fields=feed{comments}&access_token=EAACEdEose0cBAPQWdGbOKWC5Qzr4zpdQiQYoUMxYiqNxiSjou2ZAG6jqLlqY7LPUZB2rszlHSdJMDZCCpDT9JwQZBMh8odU6xq3NQhoYP2X88YnYxwb2mnWGk6htEEMOD0jqNQEWPjY1Oh7C9wr4fWkgGIlmS8ljCZBIqBENEEsD5Q23C85ZCVLjZCnCliowVEZD')
+    axios.get('https://graph.facebook.com/138501810233037?fields=feed{comments}&access_token=EAACEdEose0cBAA5UF6U8bJHkyjJO87zj2MFMYeDgxZCuycRUZBggZAcuFWo5Op3t6nTu7LC1pUw3qQqxCUoklvyhPJKOBzW1NTvBmmA5ZBKikBFBKLZAgP3xCubKAYVQK3XBoTTKk98UZA0iwCcOPiZBYgkG9nS7MxXI1OV06xcuMOWjqcrXXYsOm53FmT7ZC7sZD')
     .then(response => {
       this.comments = response.data
       // console.log(this.comments.feed.data[0].comments.data[0].from.name)
@@ -259,6 +349,8 @@ export default {
           // comment start
           let result = that.todo.find(item => item.id === comment.id)
           // console.log(result)
+
+          // comment Start
           if (progress.message === '#start' && result.status === 'ยังไม่ได้ทำ') {
             // let result = that.todo.find(item => item.id === comment.id)
             result.status = 'กำลังทำ'
@@ -274,13 +366,18 @@ export default {
             // console.log(that.datetime)
             // console.log(that.test.id)
           }
+          // End comment Start
+
+          // Name
           if (progress.message.substr(0, 5) === '#name') {
             if (progress.message.substr(6, 20) === '') {
               result.name = result.name + ''
             }
             else result.name = result.name + 'Name : ' + progress.message.substr(6, 20)
           }
-          // console.log(progress.message)
+          // End name
+
+          // Date
           if (progress.message.substr(0, 5) === '#date') {
             if (progress.message.substr(6, 20) === '') {
               result.dateend = ''
@@ -288,21 +385,203 @@ export default {
             else {
               result.dateend = progress.message.substr(6, 10)
               result.dateendday = progress.message.substr(14, 2)
+              if (result.dateendday === '01') {
+                result.dateendday = 1
+              }
+              if (result.dateendday === '02') {
+                result.dateendday = 2
+              }
+              if (result.dateendday === '03') {
+                result.dateendday = 3
+              }
+              if (result.dateendday === '04') {
+                result.dateendday = 4
+              }
+              if (result.dateendday === '05') {
+                result.dateendday = 5
+              }
+              if (result.dateendday === '06') {
+                result.dateendday = 6
+              }
+              if (result.dateendday === '07') {
+                result.dateendday = 7
+              }
+              if (result.dateendday === '08') {
+                result.dateendday = 8
+              }
+              if (result.dateendday === '09') {
+                result.dateendday = 9
+              }
               if (result.dateendday === '10') {
                 result.dateendday = 10
+              }
+              if (result.dateendday === '11') {
+                result.dateendday = 11
+              }
+              if (result.dateendday === '12') {
+                result.dateendday = 12
+              }
+              if (result.dateendday === '13') {
+                result.dateendday = 13
+              }
+              if (result.dateendday === '14') {
+                result.dateendday = 14
+              }
+              if (result.dateendday === '15') {
+                result.dateendday = 15
+              }
+              if (result.dateendday === '16') {
+                result.dateendday = 16
+              }
+              if (result.dateendday === '17') {
+                result.dateendday = 17
+              }
+              if (result.dateendday === '18') {
+                result.dateendday = 18
+              }
+              if (result.dateendday === '19') {
+                result.dateendday = 19
+              }
+              if (result.dateendday === '20') {
+                result.dateendday = 20
+              }
+              if (result.dateendday === '21') {
+                result.dateendday = 21
+              }
+              if (result.dateendday === '22') {
+                result.dateendday = 22
+              }
+              if (result.dateendday === '23') {
+                result.dateendday = 23
+              }
+              if (result.dateendday === '24') {
+                result.dateendday = 24
+              }
+              if (result.dateendday === '25') {
+                result.dateendday = 25
+              }
+              if (result.dateendday === '26') {
+                result.dateendday = 26
+              }
+              if (result.dateendday === '27') {
+                result.dateendday = 27
+              }
+              if (result.dateendday === '28') {
+                result.dateendday = 28
+              }
+              if (result.dateendday === '29') {
+                result.dateendday = 29
+              }
+              if (result.dateendday === '30') {
+                result.dateendday = 30
+              }
+              if (result.dateendday === '31') {
+                result.dateendday = 31
               }
               console.log(result.dateendday)
               that.dateend = result.dateend
             }
           }
-          // End comment start
+          // End date
+
+          // comment End
           if (progress.message === '#end' && result.status === 'กำลังทำ') {
             // let result = that.todo.find(item => item.id === comment.id)
             result.status = 'ทำเสร็จแล้ว'
             result.ondelay = progress.created_time.substr(0, 10)
             result.ondelayday = progress.created_time.substr(8, 2)
+            if (result.ondelayday === '01') {
+              result.ondelayday = 1
+            }
+            if (result.ondelayday === '02') {
+              result.ondelayday = 2
+            }
+            if (result.ondelayday === '03') {
+              result.ondelayday = 3
+            }
+            if (result.ondelayday === '04') {
+              result.ondelayday = 4
+            }
+            if (result.ondelayday === '05') {
+              result.ondelayday = 5
+            }
             if (result.ondelayday === '06') {
               result.ondelayday = 6
+            }
+            if (result.ondelayday === '07') {
+              result.ondelayday = 7
+            }
+            if (result.ondelayday === '08') {
+              result.ondelayday = 8
+            }
+            if (result.ondelayday === '09') {
+              result.ondelayday = 9
+            }
+            if (result.ondelayday === '10') {
+              result.ondelayday = 10
+            }
+            if (result.ondelayday === '11') {
+              result.ondelayday = 11
+            }
+            if (result.ondelayday === '12') {
+              result.ondelayday = 12
+            }
+            if (result.ondelayday === '13') {
+              result.ondelayday = 13
+            }
+            if (result.ondelayday === '14') {
+              result.ondelayday = 14
+            }
+            if (result.ondelayday === '15') {
+              result.ondelayday = 15
+            }
+            if (result.ondelayday === '16') {
+              result.ondelayday = 16
+            }
+            if (result.ondelayday === '17') {
+              result.ondelayday = 17
+            }
+            if (result.ondelayday === '18') {
+              result.ondelayday = 18
+            }
+            if (result.ondelayday === '19') {
+              result.ondelayday = 19
+            }
+            if (result.ondelayday === '20') {
+              result.ondelayday = 20
+            }
+            if (result.ondelayday === '21') {
+              result.ondelayday = 21
+            }
+            if (result.ondelayday === '22') {
+              result.ondelayday = 22
+            }
+            if (result.ondelayday === '23') {
+              result.ondelayday = 23
+            }
+            if (result.ondelayday === '24') {
+              result.ondelayday = 24
+            }
+            if (result.ondelayday === '25') {
+              result.ondelayday = 25
+            }
+            if (result.ondelayday === '26') {
+              result.ondelayday = 26
+            }
+            if (result.ondelayday === '27') {
+              result.ondelayday = 27
+            }
+            if (result.ondelayday === '28') {
+              result.ondelayday = 28
+            }
+            if (result.ondelayday === '29') {
+              result.ondelayday = 29
+            }
+            if (result.ondelayday === '30') {
+              result.ondelayday = 30
+            }
+            if (result.ondelayday === '31') {
+              result.ondelayday = 31
             }
             // console.log(that.dateend)
             console.log(result.dmy);
@@ -312,6 +591,7 @@ export default {
             // console.log(that.todo)s
             // console.log(that.test.id)sssหsss
           }
+          // End comment End
         })
         // console.log(that.progress)
       })
