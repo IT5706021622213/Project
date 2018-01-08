@@ -1,10 +1,10 @@
 <template>
-  <nav class="navbar navbar-expand-lg" style="background-color: #F2F6FC">
+  <nav class="navbar navbar-expand-lg" style="">
     <div class="col-md-10">
-
+      <a class="navbar-brand" href="#"><font color="#272829" size="2">Workload status tracking system based on Scrum solution via posts upon Facebook page.</font></a>
     </div>
     <div class="col-md-2">
-      <a class="navbar-brand" href="#"><font color="#000000" size="2">Date : {{ datetime }} {{ datetimeday }} {{ datetimemonth }} {{ datetimeyear }}</font></a>
+      <a class="navbar-brand" href="#"><font color="#272829" size="2">Date : {{ datetime }} {{ datetimeday }} {{ datetimemonth }} {{ datetimeyear }}</font></a>
     </div>
   </nav>
 </template>

@@ -376,7 +376,7 @@
         this.pieChart.data.series = [ this.todocount, this.progresscount, this.donecount]
         this.pieChart.data.labels = [ `${this.todocount}`, `${this.progresscount}`, `${this.donecount}`]
       },
-      ApinanA () {
+      PerformanceA () {
         // this.$set(this.pieChart.data.series, 'labels', ['10%', '10%', '80%'])
         this.barChart.data.series = [
           [this.PerformanceA],
@@ -390,7 +390,7 @@
     // Fetches posts when the component is created.
     created () {
       let that = this
-      axios.get('https://graph.facebook.com/138501810233037?fields=feed&access_token=EAACEdEose0cBAJqcDEwjTk4rxf71vPJlhZBM7OPMW4LJG4AR3SLT6hJmgKmbQhjPOR8SADxPwQDTRkhR6xr0GRA3L9S9G3gEEZBFF0B3EHG5wJOh4epwoGVwIvi9qhAXfOW5XB49KUlUWPPYEwtNxyDlNgnZANVZAPb0bsmjZBVRk9ZCywzR5dLMU4d9OZAyAgZD')
+      axios.get('https://graph.facebook.com/138501810233037?fields=feed&access_token=EAACEdEose0cBAEwzpqZCLCcwjRnUrwu7t3bGZB9QsYBIrEXHxVy1wf914TGzjQlim2HJ4ZBT60U9bMiOfefupyZBIRFZCAPCB4CVXbAqLrgCwy84FdVbv2vL7qX3UuYBPZApsiKaMozsOyEizWL5Pkl6ZBOQawOWVQaA2a9yY8jSltPnByFWOLXJw3pbntVMa4ZD')
       .then(response => {
         this.posts = response.data
         // console.log(this.posts.feed.data)s
@@ -434,7 +434,7 @@
           // End To Do
         })
       })
-      axios.get('https://graph.facebook.com/138501810233037?fields=feed{comments}&access_token=EAACEdEose0cBAJqcDEwjTk4rxf71vPJlhZBM7OPMW4LJG4AR3SLT6hJmgKmbQhjPOR8SADxPwQDTRkhR6xr0GRA3L9S9G3gEEZBFF0B3EHG5wJOh4epwoGVwIvi9qhAXfOW5XB49KUlUWPPYEwtNxyDlNgnZANVZAPb0bsmjZBVRk9ZCywzR5dLMU4d9OZAyAgZD')
+      axios.get('https://graph.facebook.com/138501810233037?fields=feed{comments}&access_token=EAACEdEose0cBAEwzpqZCLCcwjRnUrwu7t3bGZB9QsYBIrEXHxVy1wf914TGzjQlim2HJ4ZBT60U9bMiOfefupyZBIRFZCAPCB4CVXbAqLrgCwy84FdVbv2vL7qX3UuYBPZApsiKaMozsOyEizWL5Pkl6ZBOQawOWVQaA2a9yY8jSltPnByFWOLXJw3pbntVMa4ZD')
       .then(response => {
         this.comments = response.data
         this.comments.feed.data.forEach(function (comment) {
@@ -671,15 +671,15 @@
               if (result.ondelayday === '31') {
                 result.ondelayday = 31
               }
-              console.log(result.dateendday);
-              console.log(result.ondelayday);
+              // console.log(result.dateendday);
+              // console.log(result.ondelayday);
               if (result.dateendday >= result.ondelayday) {
                 that.PerformanceOnTime++
-                console.log('On');
+                // console.log('On');
               }
               if (result.dateendday < result.ondelayday)  {
                 that.PerformanceDelay++
-                console.log('De');
+                // console.log('De');
               }
               that.progresscount--
               that.donecount++
