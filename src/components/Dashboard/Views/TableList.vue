@@ -292,7 +292,7 @@ export default {
   // Fetches posts when the component is created.
   created () {
     let that = this
-    axios.get('https://graph.facebook.com/138501810233037?fields=feed&access_token=EAACEdEose0cBAA5UF6U8bJHkyjJO87zj2MFMYeDgxZCuycRUZBggZAcuFWo5Op3t6nTu7LC1pUw3qQqxCUoklvyhPJKOBzW1NTvBmmA5ZBKikBFBKLZAgP3xCubKAYVQK3XBoTTKk98UZA0iwCcOPiZBYgkG9nS7MxXI1OV06xcuMOWjqcrXXYsOm53FmT7ZC7sZD')
+    axios.get('https://graph.facebook.com/138501810233037?fields=feed&access_token=EAACEdEose0cBAJqcDEwjTk4rxf71vPJlhZBM7OPMW4LJG4AR3SLT6hJmgKmbQhjPOR8SADxPwQDTRkhR6xr0GRA3L9S9G3gEEZBFF0B3EHG5wJOh4epwoGVwIvi9qhAXfOW5XB49KUlUWPPYEwtNxyDlNgnZANVZAPb0bsmjZBVRk9ZCywzR5dLMU4d9OZAyAgZD')
     .then(response => {
       this.posts = response.data
       // console.log(this.posts.feed.data)s
@@ -332,23 +332,12 @@ export default {
         }
       })
     })
-    axios.get('https://graph.facebook.com/138501810233037?fields=feed{comments}&access_token=EAACEdEose0cBAA5UF6U8bJHkyjJO87zj2MFMYeDgxZCuycRUZBggZAcuFWo5Op3t6nTu7LC1pUw3qQqxCUoklvyhPJKOBzW1NTvBmmA5ZBKikBFBKLZAgP3xCubKAYVQK3XBoTTKk98UZA0iwCcOPiZBYgkG9nS7MxXI1OV06xcuMOWjqcrXXYsOm53FmT7ZC7sZD')
+    axios.get('https://graph.facebook.com/138501810233037?fields=feed{comments}&access_token=EAACEdEose0cBAJqcDEwjTk4rxf71vPJlhZBM7OPMW4LJG4AR3SLT6hJmgKmbQhjPOR8SADxPwQDTRkhR6xr0GRA3L9S9G3gEEZBFF0B3EHG5wJOh4epwoGVwIvi9qhAXfOW5XB49KUlUWPPYEwtNxyDlNgnZANVZAPb0bsmjZBVRk9ZCywzR5dLMU4d9OZAyAgZD')
     .then(response => {
       this.comments = response.data
-      // console.log(this.comments.feed.data[0].comments.data[0].from.name)
-      // console.log(this.comments.feed.data[0].comments.data[0].message)
       this.comments.feed.data.forEach(function (comment) {
-        // let result = that.todo.find(item => item === comment.fields
-        // console.log(result);
-        // that.progress.push(result)
-        // console.log(comment.id)
         comment.comments.data.forEach(function (progress) {
-          // console.log(progress.message);
-          // console.log(progress.from.name);ssssssssss
-
-          // comment start
           let result = that.todo.find(item => item.id === comment.id)
-          // console.log(result)
 
           // comment Start
           if (progress.message === '#start' && result.status === 'ยังไม่ได้ทำ') {
@@ -356,12 +345,8 @@ export default {
             result.status = 'กำลังทำ'
             result.date = progress.created_time.substr(8, 2)
             result.dmy = progress.created_time.substr(0, 10)
-            // if (progress.message.substr(0, 5) === '#name') {
-            //   result.name = result.name + progress.message.substr(6, 20)
-            // }
             that.progresscount++
             that.number = progress.created_time.substr(9, 1)
-            that.sumprogress = that.progresscount - that.donecount
             that.todo.push(result)
             // console.log(that.datetime)
             // console.log(that.test.id)

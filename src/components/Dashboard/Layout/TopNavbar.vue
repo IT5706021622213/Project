@@ -1,7 +1,10 @@
 <template>
   <nav class="navbar navbar-expand-lg" style="background-color: #F2F6FC">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#"><font color="#000000" size="2">Workload status tracking system based on </font><font color="#002089" size="2">Scrum</font><font color="#000000" size="2"> solution via posts upon </font><font color="#002089" size="2">Facebook</font><font color="#000000" size="2"> page. </font></a>
+    <div class="col-md-10">
+
+    </div>
+    <div class="col-md-2">
+      <a class="navbar-brand" href="#"><font color="#000000" size="2">Date : {{ datetime }} {{ datetimeday }} {{ datetimemonth }} {{ datetimeyear }}</font></a>
     </div>
   </nav>
 </template>
@@ -16,7 +19,11 @@
     },
     data () {
       return {
-        activeNotifications: false
+        activeNotifications: false,
+        datetime: '',
+        datetimeday: '',
+        datetimemonth: '',
+        datetimeyear: ''
       }
     },
     methods: {
@@ -35,6 +42,14 @@
       hideSidebar () {
         this.$sidebar.displaySidebar(false)
       }
+    },
+    mounted () {
+      let that = this
+      // that.datetime = Date()
+      that.datetime = Date().substr(0, 3)
+      that.datetimeday = Date().substr(8, 2)
+      that.datetimemonth = Date().substr(4, 3)
+      that.datetimeyear = Date().substr(11, 4)
     }
   }
 
