@@ -30,7 +30,7 @@
                       <font color="#000000" size="2">&nbsp;&nbsp;&nbsp;{{ message.msg }}</font>
                       <div style="padding-top:10px">
                         <font color="#000000" size="2">Date : {{ tododmy }}</font><br>
-                        <font color="#000000" size="2">Time : {{ todotime }}</font>
+                        <!-- <font color="#000000" size="2">Time : {{ todotime }}</font> -->
                       </div>
                     </div>
                   </div>
@@ -71,15 +71,9 @@
                           <font color="#000000" size="2">Job Start : {{ progress.dmy }}</font><br>
                           <font color="#000000" size="2">Deadline : {{ progress.dateend }}</font>
                         </div>
-                        <font color="#000000" size="2">{{ progress.name }}</font><br>
-                        <div v-if = "progress.name == 'Apinan Singbut'">
-                          <font color="#000000" size="2">Position : Programmer</font>
-                        </div>
-                        <div v-if = "progress.name == 'Nitigan Nakjuatong'">
-                          <font color="#000000" size="2">Position : Testing</font>
-                        </div>
-                        <div v-if = "progress.name != 'Apinan Singbut' && progress.name != 'Nitigan Nakjuatong'">
-                          <font color="#000000" size="2">Position : UI / UX</font>
+                        <font color="#000000" size="2">Name : {{ progress.name }}</font><br>
+                        <div>
+                          <font color="#000000" size="2">Position : Personnel</font>
                         </div>
                       </div>
                     </div>
@@ -122,7 +116,10 @@
                         <font color="#000000" size="2">Job End : {{ dodone.ondelay }}</font>
                       </div>
                       <div>
-                        <font color="#000000" size="2">{{ dodone.name }}</font>
+                        <font color="#000000" size="2">Name : {{ dodone.name }}</font>
+                      </div>
+                      <div>
+                        <font color="#000000" size="2">Position : Personnel</font>
                       </div>
                     </div>
                   </div>
@@ -292,7 +289,7 @@ export default {
   // Fetches posts when the component is created.
   created () {
     let that = this
-    axios.get('https://graph.facebook.com/138501810233037?fields=feed&access_token=EAACEdEose0cBAEwzpqZCLCcwjRnUrwu7t3bGZB9QsYBIrEXHxVy1wf914TGzjQlim2HJ4ZBT60U9bMiOfefupyZBIRFZCAPCB4CVXbAqLrgCwy84FdVbv2vL7qX3UuYBPZApsiKaMozsOyEizWL5Pkl6ZBOQawOWVQaA2a9yY8jSltPnByFWOLXJw3pbntVMa4ZD')
+    axios.get('https://graph.facebook.com/138501810233037?fields=feed&access_token=EAACEdEose0cBAMhHdhhZBafkFawjMVpZC9rFFNMj10RLfH0YimEAf2Kl41yRoNZBRHnoHRWnMTZAP3xttkV1tdOZBzB8LdwxmtRfZAkaycVWnl67IdZBMJxIO9JDdqWsMHTdlyWabkg4j6953LtnkkeTujvVfU6F55uDJrt8Mf1Ae7gvCFT3vNY48n3amt2m4sZD')
     .then(response => {
       this.posts = response.data
       // console.log(this.posts.feed.data)s
@@ -332,7 +329,7 @@ export default {
         }
       })
     })
-    axios.get('https://graph.facebook.com/138501810233037?fields=feed{comments}&access_token=EAACEdEose0cBAEwzpqZCLCcwjRnUrwu7t3bGZB9QsYBIrEXHxVy1wf914TGzjQlim2HJ4ZBT60U9bMiOfefupyZBIRFZCAPCB4CVXbAqLrgCwy84FdVbv2vL7qX3UuYBPZApsiKaMozsOyEizWL5Pkl6ZBOQawOWVQaA2a9yY8jSltPnByFWOLXJw3pbntVMa4ZD')
+    axios.get('https://graph.facebook.com/138501810233037?fields=feed{comments}&access_token=EAACEdEose0cBAMhHdhhZBafkFawjMVpZC9rFFNMj10RLfH0YimEAf2Kl41yRoNZBRHnoHRWnMTZAP3xttkV1tdOZBzB8LdwxmtRfZAkaycVWnl67IdZBMJxIO9JDdqWsMHTdlyWabkg4j6953LtnkkeTujvVfU6F55uDJrt8Mf1Ae7gvCFT3vNY48n3amt2m4sZD')
     .then(response => {
       this.comments = response.data
       this.comments.feed.data.forEach(function (comment) {
@@ -358,7 +355,7 @@ export default {
             if (progress.message.substr(6, 20) === '') {
               result.name = result.name + ''
             }
-            else result.name = result.name + 'Name : ' + progress.message.substr(6, 20)
+            else result.name = result.name + progress.message.substr(6, 20) + ' , '
           }
           // End name
 

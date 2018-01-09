@@ -93,10 +93,10 @@
             <h4 style="font-size: 16px; font-weight: 300; padding-top: 10px;">Nitigan Nakjuatong : {{ progress3 }} Job</h4>
             <div style="font-size: 14px; font-weight: 400; color: #9A9A9A; margin-top: -6px; padding-bottom: 10px;">Position : Testing</div>
             <progress-bar v-model="progress3"/>
-            <h4 style="font-size: 16px; font-weight: 300; padding-top: 10px;">Personnel D : {{ progress4 }} Job</h4>
-            <div style="font-size: 14px; font-weight: 400; color: #9A9A9A; margin-top: -6px; padding-bottom: 10px;">Position : Personnel</div>
+            <h4 style="font-size: 16px; font-weight: 300; padding-top: 10px;">ไข่ต้ม รมควัน : {{ progress4 }} Job</h4>
+            <div style="font-size: 14px; font-weight: 400; color: #9A9A9A; margin-top: -6px; padding-bottom: 10px;">Position : Designer</div>
             <progress-bar v-model="progress4"/>
-            <h4 style="font-size: 16px; font-weight: 300; padding-top: 10px;">Personnel E : {{ progress5 }} Job</h4>
+            <h4 style="font-size: 16px; font-weight: 300; padding-top: 10px;">Netiwit Keawthong : {{ progress5 }} Job</h4>
             <div style="font-size: 14px; font-weight: 400; color: #9A9A9A; margin-top: -6px; padding-bottom: 10px;">Position : Personnel</div>
             <progress-bar v-model="progress5"/>
           </section>
@@ -199,6 +199,8 @@
         Apinan: 0,
         Ratabhoom: 0,
         Nitigan: 0,
+        Nattapong: 0,
+        Netiwit: 0,
 
         progress1: 0,
         progress2: 0,
@@ -390,7 +392,7 @@
     // Fetches posts when the component is created.
     created () {
       let that = this
-      axios.get('https://graph.facebook.com/138501810233037?fields=feed&access_token=EAACEdEose0cBAEwzpqZCLCcwjRnUrwu7t3bGZB9QsYBIrEXHxVy1wf914TGzjQlim2HJ4ZBT60U9bMiOfefupyZBIRFZCAPCB4CVXbAqLrgCwy84FdVbv2vL7qX3UuYBPZApsiKaMozsOyEizWL5Pkl6ZBOQawOWVQaA2a9yY8jSltPnByFWOLXJw3pbntVMa4ZD')
+      axios.get('https://graph.facebook.com/138501810233037?fields=feed&access_token=EAACEdEose0cBAMhHdhhZBafkFawjMVpZC9rFFNMj10RLfH0YimEAf2Kl41yRoNZBRHnoHRWnMTZAP3xttkV1tdOZBzB8LdwxmtRfZAkaycVWnl67IdZBMJxIO9JDdqWsMHTdlyWabkg4j6953LtnkkeTujvVfU6F55uDJrt8Mf1Ae7gvCFT3vNY48n3amt2m4sZD')
       .then(response => {
         this.posts = response.data
         // console.log(this.posts.feed.data)s
@@ -434,7 +436,7 @@
           // End To Do
         })
       })
-      axios.get('https://graph.facebook.com/138501810233037?fields=feed{comments}&access_token=EAACEdEose0cBAEwzpqZCLCcwjRnUrwu7t3bGZB9QsYBIrEXHxVy1wf914TGzjQlim2HJ4ZBT60U9bMiOfefupyZBIRFZCAPCB4CVXbAqLrgCwy84FdVbv2vL7qX3UuYBPZApsiKaMozsOyEizWL5Pkl6ZBOQawOWVQaA2a9yY8jSltPnByFWOLXJw3pbntVMa4ZD')
+      axios.get('https://graph.facebook.com/138501810233037?fields=feed{comments}&access_token=EAACEdEose0cBAMhHdhhZBafkFawjMVpZC9rFFNMj10RLfH0YimEAf2Kl41yRoNZBRHnoHRWnMTZAP3xttkV1tdOZBzB8LdwxmtRfZAkaycVWnl67IdZBMJxIO9JDdqWsMHTdlyWabkg4j6953LtnkkeTujvVfU6F55uDJrt8Mf1Ae7gvCFT3vNY48n3amt2m4sZD')
       .then(response => {
         this.comments = response.data
         this.comments.feed.data.forEach(function (comment) {
@@ -706,6 +708,14 @@
             if (progress.message.substr(6, 50) === 'Nitigan Nakjuatong') {
               that.Nitigan++
               that.progress3 = that.Nitigan
+            }
+            if (progress.message.substr(6, 50) === 'ไข่ต้ม รมควัน') {
+              that.Nattapong++
+              that.progress4 = that.Nattapong
+            }
+            if (progress.message.substr(6, 50) === 'Netiwit Keawthong') {
+              that.Netiwit++
+              that.progress5 = that.Netiwit
             }
           })
           // console.log(that.progress)
